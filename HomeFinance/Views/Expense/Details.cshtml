@@ -1,0 +1,44 @@
+﻿@model Expense
+
+@{
+    ViewBag.Title = "Expense Detail";
+}
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header text-center bg-primary">
+                <h2><b>Expense Id : @Model.ExpenseID</b></h2>
+            </div>
+
+            <div class="card-body text-center">
+                <h4>Category    : @Model.ExpenseCategory</h4>
+                <h4>Type        : @Model.ExpenseType</h4>
+                <h4>Date        : @Model.ExpenseDate.ToString("d")</h4>
+                <h4>Amount      : @Model.ExpenseAmount.ToString("C")</h4>
+                <h4>Details     : @Model.ExpenseDetails</h4>
+            </div>
+            <div class="card-footer text-center">
+                <form asp-action="Delete" asp-route-id="@Model.ExpenseID" method="post">
+                    <a asp-controller="Expense" asp-action="Index" class="btn btn-primary">Back</a>
+                    <a asp-controller="Expense" asp-action="Edit" asp-route-id="@Model.ExpenseID"
+                       class="btn btn-primary">Edit</a>
+                    <span id="confirmDeleteSpan_@Model.ExpenseID" style="display:none">
+                        <span>Are you sure you want to delete?</span>
+                        <button type="submit" class="btn btn-danger">Yes</button>
+                        <a href="#" class="btn btn-primary"
+                           onclick="confirmDelete('@Model.ExpenseID', false)">No</a>
+                    </span>
+                    <span id="deleteSpan_@Model.ExpenseID">
+                        <a href="#" class="btn btn-danger"
+                           onclick="confirmDelete('@Model.ExpenseID', true)">Delete</a>
+                    </span>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/CustomScript.js"></script>
+}

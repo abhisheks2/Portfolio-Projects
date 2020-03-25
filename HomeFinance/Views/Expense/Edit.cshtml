@@ -1,0 +1,67 @@
+﻿@model Expense
+
+@{
+    ViewBag.Title = "Expense Detail";
+}
+
+<form method="post">
+    <div class="row justify-content-center m-3">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header text-center bg-primary">
+                    <h2><b>Edit Expense Id: @Model.ExpenseID</b></h2>
+                    @Html.HiddenFor(model => model.ExpenseID)
+                </div>
+
+                <div class="card-body text-left">
+                    <div class="form-group row">
+                        <label asp-for="ExpenseCategory" class="col-sm-2 col-form-label">Category</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" asp-for="ExpenseCategory"
+                                    asp-items="Html.GetEnumSelectList<CategoryEnum>()">
+                                <option value="">Please select a Category</option>
+                            </select>
+                            <span asp-validation-for="ExpenseCategory" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="ExpenseType" class="col-sm-2 col-form-label">Type</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" asp-for="ExpenseType"
+                                    asp-items="Html.GetEnumSelectList<TypeEnum>()">
+                                <option value="">Please select a Type</option>
+                            </select>
+                            <span asp-validation-for="ExpenseType" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="ExpenseDate" class="col-sm-2 col-form-label">Date</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="ExpenseDate" type="date" />
+                            <span asp-validation-for="ExpenseDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="ExpenseAmount" class="col-sm-2 col-form-label">Amount £</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" asp-for="ExpenseAmount" type="number" min="0" step="0.01" />
+                            <span asp-validation-for="ExpenseAmount" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="ExpenseDetails" class="col-sm-2 col-form-label">Detail</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" asp-for="ExpenseDetails" rows="3"></textarea>
+                            <span asp-validation-for="ExpenseDetails" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer text-center">
+                    <a asp-controller="Expense" asp-action="Index" class="btn btn-primary">Back</a>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<JobPortal.Models.JobPost>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Jobs</h2>
+
+<table class="table">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.Category.category_name)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.Area.area_name)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.JobTitle.jobtitleName)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.type)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.location)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.isAvailable)
+        </th>
+        <th class="text-center">Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.category_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area.area_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobTitle.jobtitleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isAvailable)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.jobPostId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.jobPostId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.jobPostId })
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.ActionLink("Post New Job", "Create")
+</p>

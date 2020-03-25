@@ -1,0 +1,117 @@
+﻿@model JobPortal.Models.CandidateProfessional
+
+@{
+    ViewBag.Title = "ExperienceEdit";
+}
+
+<h2>Experience Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.HiddenFor(model => model.candidateProfId)
+        @Html.HiddenFor(model => model.candidateId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.company, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.company, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.company, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.industry, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.industry, null, "Select Industry", new { @class = "form-control", id = "industryDDL" })
+                @Html.ValidationMessageFor(model => model.industry, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.areaId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.areaId, null, "Select Area", new { @class = "form-control", id = "areaDDL" })
+                @Html.ValidationMessageFor(model => model.areaId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.experienceYears, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.experienceYears, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.experienceYears, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.experienceMonth, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.experienceMonth, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.experienceMonth, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.salary, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.salary, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.salary, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.industryRole, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.industryRole, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.industryRole, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.skills, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.skills, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.skills, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" /> |
+                @Html.ActionLink("Back", "ExperienceDetail", new { candidateId = Model.candidateId })
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var areaDDL = $('#areaDDL');
+        $('#industryDDL').change(function () {
+            areaDDL.empty();
+            areaDDL.append($('<option/>', { value: '', text: 'Select Area' }));
+            if ($(this).val() != "") {
+                $.ajax({
+                    type: 'post',
+                    url: '/JobSeeker/JobSeeker/GetArea',
+                    data: { categoryId: $(this).val() },
+                    dataType: 'json',
+                    traditional: true,
+                    success: function (data) {
+                        $(data).each(function (index, item) {
+                            areaDDL.append($('<option/>', { value: item.areaId, text: item.areaName }));
+                        });
+                    },
+                });
+            }
+        });
+    </script>
+}

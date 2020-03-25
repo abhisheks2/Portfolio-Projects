@@ -1,0 +1,17 @@
+﻿@using (Ajax.BeginForm("QuickSearchCandidates", "SearchCandidates",new { area = "Recruiter"},
+    new AjaxOptions
+{
+    HttpMethod = "GET", // HttpMethod to use, GET or POST
+    UpdateTargetId = "divCandidates", // ID of the HTML element to update
+    InsertionMode = InsertionMode.Replace, // Replace the existing contents
+    OnBegin = "CleardivCandidates"
+}))
+{
+    <div>
+        Industry:               @Html.DropDownList("Industry", "Select Industry")
+        Skills:                 @Html.TextBox("Skills", (string)ViewBag.skills)
+        Minimum Experience:     @Html.TextBox("MinExp", (string)ViewBag.minexp, new { type = "number" })
+        Maximum Experience:     @Html.TextBox("MaxExp", (string)ViewBag.maxexp, new { type = "number" })
+        <input type="submit" value="Search" class="btn btn-default" />
+    </div>
+}

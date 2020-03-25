@@ -1,0 +1,76 @@
+﻿@model JobPortal.Models.CandidateProfessional
+
+@{
+    ViewBag.Title = "ViewProfessional";
+}
+
+<h2>Experience Details</h2>
+
+<div>
+    <hr />
+    @Html.HiddenFor(model => model.candidateProfId)
+    @Html.HiddenFor(model => model.candidateId)
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.industry)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.industry)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.areaId)
+        </dt>
+
+        <dd>
+            @ViewBag.Area
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.experienceYears)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.experienceYears)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.experienceMonth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.experienceMonth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.salary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.salary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.industryRole)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.industryRole)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.skills)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.skills)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit Experience Deatils", "ExperienceEdit", new { candidateId = Model.candidateId }) |
+    @Html.ActionLink("View Educational Details", "ViewEducation", new { candidateId = Model.candidateId }) |
+    @Html.ActionLink("View Personal Details", "JobSeekerProfile")
+</p>

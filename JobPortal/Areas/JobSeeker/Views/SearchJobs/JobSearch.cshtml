@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "JobSearch";
+}
+<div>
+    <h2>JobSearch</h2>
+
+    @Ajax.ActionLink("Jobs By Industry", "JobsByIndustry", "SearchJobs",
+        new { area = "JobSeeker" },
+        new AjaxOptions
+        {
+            HttpMethod = "GET", // HttpMethod to use, GET or POST
+            UpdateTargetId = "divJobLinks", // ID of the HTML element to update
+            InsertionMode = InsertionMode.Replace, // Replace the existing contents
+            LoadingElementId = "divloading",
+            OnBegin = "ClearDivJobLinks",
+            OnSuccess = "SaveSearchOption1"
+        })
+
+    <span style="color:Blue">|</span>
+
+    @Ajax.ActionLink("Jobs By Location", "JobsByLocation", "SearchJobs",
+        new { area = "JobSeeker" },
+        new AjaxOptions
+        {
+            HttpMethod = "GET", // HttpMethod to use, GET or POST
+            UpdateTargetId = "divJobLinks", // ID of the HTML element to update
+            InsertionMode = InsertionMode.Replace, // Replace the existing contents
+            LoadingElementId = "divloading",
+            OnBegin = "ClearDivJobLinks",
+            OnSuccess = "SaveSearchOption2"
+        })
+
+    <span style="color:Blue">|</span>
+
+    @Ajax.ActionLink("Quick Search", "QuickSearch", "SearchJobs",
+        new { industry = "", area1 = "", jobType = "", location = "", area = "JobSeeker" },
+        new AjaxOptions
+        {
+            HttpMethod = "GET", // HttpMethod to use, GET or POST
+            UpdateTargetId = "divJobLinks", // ID of the HTML element to update
+            InsertionMode = InsertionMode.Replace, // Replace the existing contents
+            LoadingElementId = "divloading",
+            OnBegin = "ClearDivJobLinks",
+            OnSuccess = "SaveSearchOption3"
+        })
+    <br />
+    <br />
+    <div id="divloading" style="display:none;">
+        <img src="~/Images/spinner.gif" />
+    </div>
+    <br />
+    <div id="divJobLinks"></div>
+    <br />
+    <br />
+    <div id="divJobs"></div>
+</div>
+@section Scripts{
+    <script>
+        function ClearDivJobLinks() {
+            $('#divJobLinks').empty();
+            $('#divJobs').empty();
+        }
+
+        function ClearDivJobs() {
+            $('#divJobs').empty();
+        }
+
+        function SaveSearchOption1() {
+            document.cookie = "searchoption=Industry";
+        }
+        function SaveSearchOption2() {
+            document.cookie = "searchoption=Location";
+        }
+        function SaveSearchOption3() {
+            document.cookie = "searchoption=QuickSearch";
+        }
+
+        $(document).ready(function ()
+        {
+            if (document.cookie.length != 0) {
+                var cookiesArray = document.cookie.split(";");
+                for (var i = 0; i < cookiesArray.length; i++)
+                {
+                    var nameValueArray = cookiesArray[i].split("=");
+                    if (nameValueArray[0] == "searchoption")
+                    {
+                        if (nameValueArray[1] == "Industry")
+                        {
+                            $('#divJobLinks').load("/JobSeeker/SearchJobs/JobsByIndustry");
+                            var cookie = '@HttpContext.Current.Request.Cookies["mycookieInd1"].Value';
+                            $('#divJobs').load("/JobSeeker/SearchJobs/DisplayJobs",
+                                {
+                                    searchBy: "industry",
+                                    searchValue: cookie
+                                });
+                        }
+                        if (nameValueArray[1] == "Location")
+                        {
+                            $('#divJobLinks').load("/JobSeeker/SearchJobs/JobsByLocation");
+                            var cookie = '@HttpContext.Current.Request.Cookies["mycookieLoc1"].Value';
+                            $('#divJobs').load("/JobSeeker/SearchJobs/DisplayJobs",
+                                {
+                                    searchBy: "location",
+                                    searchValue: cookie
+                                });
+                        }
+                        if (nameValueArray[1] == "QuickSearch")
+                        {
+                            var cookie = '@HttpContext.Current.Request.Cookies["mycookie1"].Value';
+                            var searchArray = cookie.split("-");
+                            $('#divJobLinks').load("/JobSeeker/SearchJobs/QuickSearch",
+                                {
+                                    industry: searchArray[0],
+                                    area1: searchArray[1],
+                                    jobType: searchArray[2],
+                                    location: searchArray[3]
+                                });
+                            $('#divJobs').load("/JobSeeker/SearchJobs/QuickSearchJobs",
+                                {
+                                    Industry: searchArray[0],
+                                    Area1: searchArray[1],
+                                    JobType: searchArray[2],
+                                    Location: searchArray[3]
+                                });
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+}

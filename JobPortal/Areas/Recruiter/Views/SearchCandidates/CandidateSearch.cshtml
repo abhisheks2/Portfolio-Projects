@@ -1,0 +1,105 @@
+﻿@{
+    ViewBag.Title = "CandidateSearch";
+}
+
+<h2>Candidate Search</h2>
+
+@Ajax.ActionLink("Candidates By Industry", "CandidatesByIndustry", "SearchCandidates",
+        new { area = "Recruiter" },
+        new AjaxOptions
+        {
+            HttpMethod = "GET", // HttpMethod to use, GET or POST
+            UpdateTargetId = "divSearchBy", // ID of the HTML element to update
+            InsertionMode = InsertionMode.Replace, // Replace the existing contents
+            LoadingElementId = "divloading",
+            OnBegin = "ClearDivs",
+            OnSuccess = "SaveSearchOption1"
+        })
+
+<span style="color:Blue">|</span>
+
+@Ajax.ActionLink("Quick Search", "QuickSearch", "SearchCandidates",
+        new { Industry = "", Skills = "", MinExp = "0", MaxExp = "0", area = "Recruiter" },
+        new AjaxOptions
+        {
+            HttpMethod = "GET", // HttpMethod to use, GET or POST
+            UpdateTargetId = "divSearchBy", // ID of the HTML element to update
+            InsertionMode = InsertionMode.Replace, // Replace the existing contents
+            LoadingElementId = "divloading",
+            OnBegin = "ClearDivs",
+            OnSuccess = "SaveSearchOption2"
+        })
+<br />
+<br />
+<div id="divloading" style="display:none;">
+    <img src="~/Images/spinner.gif" />
+</div>
+<br />
+<div id="divSearchBy"></div>
+<br />
+<br />
+<div id="divCandidates"></div>
+
+@section Scripts {
+    <script>
+        function CleardivCandidates() {
+            $('#divCandidates').empty();
+        }
+
+        function ClearDivs() {
+            $('#divSearchBy').empty();
+            $('#divCandidates').empty();
+        }
+
+        function SaveSearchOption1() {
+            document.cookie = "searchoption=Industry";
+        }
+
+        function SaveSearchOption2() {
+            document.cookie = "searchoption=QuickSearch";
+        }
+
+        $(document).ready(function ()
+        {
+            if (document.cookie.length != 0) {
+                var cookiesArray = document.cookie.split(";");
+                for (var i = 0; i < cookiesArray.length; i++)
+                {
+                    var nameValueArray = cookiesArray[i].split("=");
+                    if (nameValueArray[0] == "searchoption")
+                    {
+                        if (nameValueArray[1] == "Industry")
+                        {
+                            $('#divSearchBy').load("/Recruiter/SearchCandidates/CandidatesByIndustry");
+                            var cookie = '@HttpContext.Current.Request.Cookies["mycookieInd2"].Value';
+                            $('#divCandidates').load("/Recruiter/SearchCandidates/DisplayCandidates",
+                                {
+                                    searchBy: "industry",
+                                    searchValue: cookie
+                                });
+                        }
+                        if (nameValueArray[1] == "QuickSearch")
+                        {
+                            var cookie = '@HttpContext.Current.Request.Cookies["mycookie2"].Value';
+                            var searchArray = cookie.split("-");
+                            $('#divSearchBy').load("/Recruiter/SearchCandidates/QuickSearch",
+                                {
+                                    Industry: searchArray[0],
+                                    Skills: searchArray[1],
+                                    MinExp: searchArray[2],
+                                    MaxExp: searchArray[3]
+                                });
+                            $('#divCandidates').load("/Recruiter/SearchCandidates/QuickSearchCandidates",
+                                {
+                                    Industry: searchArray[0],
+                                    Skills: searchArray[1],
+                                    MinExp: searchArray[2],
+                                    MaxExp: searchArray[3]
+                                });
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+}

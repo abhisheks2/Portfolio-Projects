@@ -1,0 +1,123 @@
+﻿@model ExpenseListViewModel
+
+@{
+    ViewBag.Title = "Expense List";
+}
+
+
+<form method="get">
+    <div class="row ml-3 mt-2">
+        <div class="col-sm-3 mb-1">
+            <b>Category:</b>
+            <select asp-for="searchCategory" asp-items="Html.GetEnumSelectList<CategoryEnum>()">
+                <option value="">Select Category</option>
+            </select>
+        </div>
+        <div class="col-sm-2 mb-1">
+            <b>Type:</b>
+            <select asp-for="searchType" asp-items="Html.GetEnumSelectList<TypeEnum>()">
+                <option value="">Select Type</option>
+            </select>
+        </div>
+        <div class="col-sm-2 mb-1">
+            <b>Year:</b>
+            <select asp-for="searchYear" asp-items="@ViewBag.YearList">
+                <option value="">Select Year</option>
+            </select>
+        </div>
+        <div class="col-sm-2 mb-1">
+            <b>Month:</b>
+            <select asp-for="searchMonth" asp-items="Html.GetEnumSelectList<MonthEnum>()">
+                <option value="">Select Month</option>
+            </select>
+        </div>
+        <div class="col-sm-2 mb-1">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <h3><b>Expense List</b></h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>
+                                ExpenseId
+                            </th>
+                            <th>
+                                Category
+                            </th>
+                            <th>
+                                Type
+                            </th>
+                            <th>
+                                Amount
+                            </th>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.expenseList)
+                        {
+                            <tr>
+                                <td>
+                                    @item.ExpenseID
+                                </td>
+                                <td>
+                                    @item.ExpenseCategory
+                                </td>
+                                <td>
+                                    @item.ExpenseType
+                                </td>
+                                <td>
+                                    @item.ExpenseAmount.ToString("C")
+                                </td>
+                                <td>
+                                    @item.ExpenseDate.ToString("d")
+                                </td>
+                                <td>
+                                    <form asp-action="Delete" asp-route-id="@item.ExpenseID" method="post">
+                                        <a asp-controller="Expense" asp-action="Details" asp-route-id="@item.ExpenseID"
+                                           class="btn btn-primary m-1">View</a>
+                                        <a asp-controller="Expense" asp-action="Edit" asp-route-id="@item.ExpenseID"
+                                           class="btn btn-primary m-1">Edit</a>
+                                        <span id="confirmDeleteSpan_@item.ExpenseID" style="display:none">
+                                            <span>Are you sure you want to delete?</span>
+                                            <button type="submit" class="btn btn-danger">Yes</button>
+                                            <a href="#" class="btn btn-primary"
+                                               onclick="confirmDelete('@item.ExpenseID', false)">No</a>
+                                        </span>
+                                        <span id="deleteSpan_@item.ExpenseID">
+                                            <a href="#" class="btn btn-danger"
+                                               onclick="confirmDelete('@item.ExpenseID', true)">Delete</a>
+                                        </span>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                <a asp-controller="Expense" asp-action="Create" class="btn btn-primary" style="width:auto">Add Expense</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/CustomScript.js"></script>
+}

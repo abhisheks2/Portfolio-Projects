@@ -1,0 +1,83 @@
+﻿@model JobPortal.Models.CandidateBasic
+
+@{
+    ViewBag.Title = "JobSeekerProfile";
+}
+
+<h2>Your Profile</h2>
+
+<div>
+    <hr class="divider"/>
+    <dl class="dl-horizontal text-justify">
+        @Html.HiddenFor(model => model.candidateId)
+
+        <dt>
+            @Html.DisplayNameFor(model => model.firstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.candidateAddr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.candidateAddr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dob)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dob)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contactNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contactNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emailId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emailId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.city)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.city)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit Profile", "EditProfile", new { candidateId = Model.candidateId }) |
+    @Html.ActionLink("View Education Details", "ViewEducation", new { candidateId = Model.candidateId }) |
+    @Html.ActionLink("View Experience Details", "ExperienceDetail", new { candidateId = Model.candidateId })
+</p>

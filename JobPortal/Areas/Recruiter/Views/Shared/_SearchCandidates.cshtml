@@ -1,0 +1,59 @@
+﻿@model IEnumerable<JobPortal.Models.CandidateProfessional>
+
+<table class="table">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.candidateId)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.industry)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.industryRole)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.skills)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.company)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.experienceYears)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.experienceMonth)
+        </th>
+        <th class="text-center">Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.candidateId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.industry)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.industryRole)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.skills)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.experienceYears)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.experienceMonth)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "CandidateDetails", new { id = item.candidateId })
+            </td>
+        </tr>
+    }
+
+</table>

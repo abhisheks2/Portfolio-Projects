@@ -1,0 +1,79 @@
+﻿/*------------------Patient Master Page CSS---------------------------*/
+#logoRow {
+    border-bottom: 5px solid black;
+}
+
+#logoImg {
+    width: 120px;
+    height: 90px;
+}
+
+#logoTxt {
+    font-size: 60px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+}
+
+.logoContact {
+    width: 50px;
+    margin-top: 20px;
+}
+
+@media screen and (min-width: 769px) {
+    .bodyBG {
+        background-image: url(../Image//IndexBackground.png);
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .bodyBG {
+        background-color: white;
+    }
+}
+
+#bodyBG1 {
+    background-image: url(../Image//MABackground.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+#bodyBG2 {
+    background-image: url(../Image//GABackground.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/*-------------Home CSS--------------------------------------------*/
+.btnHome {
+    background-color: #33CCCC;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: White;
+    width: 300px;
+    text-transform: uppercase;
+    height: 60px;
+}
+
+/*-------------Admin Login CSS--------------------------------------------*/
+.emptyTR200 {
+    height: 200px;
+}
+
+.emptyTR25 {
+    height: 25px;
+}
+
+.loginTD {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/*-------------DCSM Master Page CSS--------------------------------------------*/
+#nav #nav-pills li a {
+    margin-top: 5px;
+}

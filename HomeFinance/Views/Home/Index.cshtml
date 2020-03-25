@@ -1,0 +1,41 @@
+﻿@model IEnumerable<DashboardViewModel>
+
+@{
+    ViewBag.Title = "Home";
+}
+
+@if (Model.Any())
+{
+    <div class="card-deck">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-sm-3">
+                    <div class="card m-3">
+                        <div class="card-header text-center" style="background-color:@item.ragStatus">
+                            <h4>@item.expType</h4>
+                        </div>
+                        <div class="card-body text-center" style="background-color:lightgray">
+                            <h4>Current Spend</h4>
+                            <h4>@item.currentSpend.ToString("C")</h4>
+                        </div>
+                        <div class="card-footer text-center" style="background-color:lightgray">
+                            <h4>Monthly Limit</h4>
+                            <h4>@item.monthlyLimit.ToString("C")</h4>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="m-5">
+        <h3>You have not set any limits. Please set limits to generate dashboard.</h3>
+        <br /><br />
+        <h4>You can still record/view/edit/delete expenses without setting expense limits.</h4>
+    </div>
+}
+
+

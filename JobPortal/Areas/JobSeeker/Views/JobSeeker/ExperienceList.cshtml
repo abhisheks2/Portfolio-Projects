@@ -1,0 +1,58 @@
+﻿@model IEnumerable<JobPortal.Models.CandidateProfessional>
+
+@{
+    ViewBag.Title = "ExperienceList";
+}
+
+<h2>Experience Details</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.industry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.experienceYears)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.experienceMonth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.industryRole)
+        </th>
+        <th>Actions</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.company)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.industry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.experienceYears)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.experienceMonth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.industryRole)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "ExperienceEdit", new { id = item.candidateProfId }) |
+            @Html.ActionLink("Details", "ExperienceDetail", new { id = item.candidateProfId }) |
+            @Html.ActionLink("Delete", "ExperienceDelete", new { id = item.candidateProfId })
+        </td>
+    </tr>
+}
+
+</table>
+
+@*<p>
+    @Html.ActionLink("Add Experience", "NewExperience")
+</p>*@

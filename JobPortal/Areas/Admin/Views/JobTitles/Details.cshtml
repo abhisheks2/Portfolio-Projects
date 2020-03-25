@@ -1,0 +1,41 @@
+﻿@model JobPortal.Models.JobTitle
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Job Title Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.jobtitleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jobtitleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Area.area_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Area.area_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.category_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.category_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.jobtitleId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

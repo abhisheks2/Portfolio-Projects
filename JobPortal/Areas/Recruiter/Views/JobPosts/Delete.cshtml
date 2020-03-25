@@ -1,0 +1,127 @@
+﻿@model JobPortal.Models.JobPost
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete Job</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal text-justify">
+        <dt>
+            @Html.DisplayNameFor(model => model.companyId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.companyId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.skillsReq)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.skillsReq)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.educationReq)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.educationReq)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contactEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contactEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.salary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.salary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isAvailable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isAvailable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Area.area_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Area.area_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.category_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.category_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JobTitle.jobtitleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobTitle.jobtitleName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

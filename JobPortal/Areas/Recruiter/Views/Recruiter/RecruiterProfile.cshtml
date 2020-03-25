@@ -1,0 +1,68 @@
+﻿@model JobPortal.Models.Company
+
+@{
+    ViewBag.Title = "RecruiterProfile";
+}
+
+<h2>Your Profile</h2>
+<hr class="divider" />
+<div>
+    <dl class="dl-horizontal text-justify">
+        @Html.HiddenFor(model => model.companyId)
+        
+        <dt class="col-md-offset-3 col-md-3">
+            @Html.DisplayNameFor(model => model.companyName)
+        </dt>
+        <dd class="col-md-5">
+            @Html.DisplayFor(model => model.companyName)
+        </dd>
+
+        <dt class="col-md-offset-3 col-md-3">
+            @Html.DisplayNameFor(model => model.contactPerson)
+        </dt>
+        <dd class="col-md-5">
+            @Html.DisplayFor(model => model.contactPerson)
+        </dd>
+
+        <dt class="col-md-offset-3 col-md-3">
+            @Html.DisplayNameFor(model => model.companyContact)
+        </dt>
+        <dd class="col-md-5">
+            @Html.DisplayFor(model => model.companyContact)
+        </dd>
+
+        <dt class="col-md-offset-3 col-md-3">
+            @Html.DisplayNameFor(model => model.companyAddr)
+        </dt>
+        <dd class="col-md-5">
+            @Html.DisplayFor(model => model.companyAddr)
+        </dd>
+
+        <dt class="col-md-offset-3 col-md-3">
+            @Html.DisplayNameFor(model => model.companyEmail)
+        </dt>
+        <dd class="col-md-5">
+            @Html.DisplayFor(model => model.companyEmail)
+        </dd>
+
+        <dt class="col-md-offset-3 col-md-3">
+            @Html.DisplayNameFor(model => model.companyDetails)
+        </dt>
+        <dd class="col-md-5">
+            @Html.DisplayFor(model => model.companyDetails)
+        </dd>
+    </dl>
+</div>
+<p class="col-md-12">
+    @Html.ActionLink("Edit Profile", "Edit", new { id = Model.companyId })
+</p>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var config = {
+                'style': 'border-width: .2rem;border-color: black;'
+            }
+            $('.divider').attr(config);
+        });
+    </script>
+}

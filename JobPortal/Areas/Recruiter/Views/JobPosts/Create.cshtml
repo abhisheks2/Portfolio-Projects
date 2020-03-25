@@ -1,0 +1,174 @@
+﻿@model JobPortal.Models.JobPost
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>JobPost</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.categoryId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.categoryId, null, "Select Industry", new { @class = "form-control", id = "industryDDL" })
+                @Html.ValidationMessageFor(model => model.categoryId, "", new { @class = "col-md-6 text-left text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.areaid, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.areaid, new List<SelectListItem>(), "Select Area", new { @class = "form-control", id = "areaDDL" })
+                @Html.ValidationMessageFor(model => model.areaid, "", new { @class = "col-md-6 text-left text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.jobTitleId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.jobTitleId, new List<SelectListItem>(), "Select Job Title", new { @class = "form-control", id = "jobtitleDDL" })
+                @Html.ValidationMessageFor(model => model.jobTitleId, "", new { @class = "col-md-6 text-left text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.type, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.type, EnumHelper.GetSelectList(typeof(JobPortal.Models.JobType)), "Select Job Type", new { @class = "form-control", id = "jobtypeDDL" })
+                @Html.ValidationMessageFor(model => model.type, "", new { @class = "col-md-6 text-left text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.location, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.location, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.location, "", new { @class = "col-md-6 text-left text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.skillsReq, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.skillsReq, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.skillsReq, "", new { @class = "col-md-6 text-left text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.educationReq, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.educationReq, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.educationReq, "", new { @class = "col-md-6 text-left text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.description, "", new { @class = "col-md-6 text-left text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.contactEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.contactEmail, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.contactEmail, "", new { @class = "col-md-6 text-left text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.salary, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.salary, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.salary, "", new { @class = "col-md-6 text-left text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isAvailable, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.isAvailable)
+                    @Html.ValidationMessageFor(model => model.isAvailable, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-4">
+                <input type="submit" value="Create" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            var config = {
+                'style': 'border:1psx solid lightgrey;border-radius:5px;width:300px;height:35px;'
+            }
+            $('#isAvailable').attr(config);
+
+            var areaDDL = $('#areaDDL');
+            var jobtitleDDL = $('#jobtitleDDL');
+            $('#industryDDL').change(function () {
+                areaDDL.empty();
+                areaDDL.append($('<option/>', { value: '', text: 'Select Area' }));
+                jobtitleDDL.empty();
+                jobtitleDDL.append($('<option/>', { value: '', text: 'Select Job Title' }));
+                if ($(this).val() != "") {
+                    $.ajax({
+                        type: 'post',
+                        url: '/Home/GetArea',
+                        data: { categoryId: $(this).val() },
+                        dataType: 'json',
+                        traditional: true,
+                        success: function (data) {
+                            $(data).each(function (index, item) {
+                                areaDDL.append($('<option/>', { value: item.areaId, text: item.areaName }));
+                            });
+                        },
+                        error: function (err) {
+                            alert(err);
+                        }
+                    });
+                }
+            });
+            $('#areaDDL').change(function () {
+                jobtitleDDL.empty();
+                jobtitleDDL.append($('<option/>', { value: '', text: 'Select Job Title' }));
+                if ($(this).val() != "") {
+                    $.ajax({
+                        type: 'post',
+                        url: '/Home/GetJobTitle',
+                        data: { areaId: $(this).val() },
+                        dataType: 'json',
+                        traditional: true,
+                        success: function (data) {
+                            $(data).each(function (index, item) {
+                                jobtitleDDL.append($('<option/>', { value: item.jobtitleId, text: item.jobtitleName }));
+                            });
+                        },
+                        error: function (err) {
+                            alert(err);
+                        }
+                    });
+                }
+            });
+        })
+    </script>
+}

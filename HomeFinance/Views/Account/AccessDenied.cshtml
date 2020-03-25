@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "AccessDenied";
+}
+
+<div class="alert alert-danger mt-1 mb-1">
+    <h3>@ViewBag.ErrorMessage</h3>
+    <hr />
+</div>
+<a asp-controller="Home" asp-action="Index" class="btn btn-outline-success" style="width:auto">
+    Click here to navigate to home page
+</a>

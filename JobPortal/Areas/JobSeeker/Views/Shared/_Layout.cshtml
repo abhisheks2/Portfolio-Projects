@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobPortal</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("JobPortal", "Index", "JobSeeker", new { area = "JobSeeker" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Your Profile", "JobSeekerProfile", "JobSeeker", new { area = "JobSeeker" }, null)</li>
+                    <li>@Html.ActionLink("Search Jobs", "JobSearch", "SearchJobs", new { area = "JobSeeker" }, null)</li>
+                    <li>@Html.ActionLink("Upload Resume", "UploadResume", "JobSeeker", new { area = "JobSeeker" }, null)</li>
+                    <li>@Html.ActionLink("Sign Out", "SignOut", "JobSeeker", new { area = "JobSeeker" }, null)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid body-content">
+        <div class="row">
+            <div class="col-xs-12">
+                @RenderBody()
+            </div>
+        </div>
+
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - JobPortal by <a href="http://abhishekshrivastava.co.uk/">abhishekshrivastava.co.uk</a></p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

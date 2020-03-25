@@ -1,0 +1,30 @@
+﻿namespace HomeFinance.Models
+{
+    public enum TypeEnum
+    {
+        Alcohol,
+        Books,
+        Broadband,
+        Bus,
+        Clothing,
+        ElectricityBill,
+        Entertainment,
+        Fuel,
+        GasBill,
+        Grocery,
+        Insurance,
+        Loan,
+        Mortgage,
+        Parking,
+        Railway,
+        Rent,
+        School,
+        Tax,
+        Taxi,
+        WaterBill,
+        Tobacco,
+        TV,
+        TVLicense,
+        Miscellaneous
+    }
+}

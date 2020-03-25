@@ -1,0 +1,46 @@
+﻿@model IEnumerable<JobPortal.Models.JobTitle>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Job Titles</h2>
+
+<table class="table">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.Category.category_name)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.Area.area_name)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.jobtitleName)
+        </th>
+        <th class="text-center">Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.category_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area.area_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.jobtitleName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.jobtitleId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.jobtitleId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.jobtitleId })
+            </td>
+        </tr>
+    }
+</table>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>

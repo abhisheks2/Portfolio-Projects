@@ -1,0 +1,82 @@
+﻿@model JobPortal.Models.CandidateBasic
+
+@{
+    ViewBag.Title = "CandidateDetails";
+}
+
+<h2>Candidate Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal text-justify">
+        <dt>
+            @Html.DisplayNameFor(model => model.firstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.candidateAddr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.candidateAddr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dob)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dob)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contactNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contactNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emailId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emailId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.city)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.city)
+        </dd>
+    </dl>
+</div>
+<p>
+    <a id="cv" class="center-block" href="@Url.Content(@Model.resumePath)" target="_blank"><h4 class="text-center">Click here to view CV</h4></a>
+</p>
+<p>
+    @Html.ActionLink("Back to Candidates List", "CandidateSearch")
+</p>

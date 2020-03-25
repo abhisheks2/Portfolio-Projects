@@ -1,0 +1,50 @@
+﻿@model IEnumerable<JobPortal.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Application Users</h2>
+
+<table class="table">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.username)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.password)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.role)
+        </th>
+        <th class="text-center">
+            Action
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.role)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.username }) |
+                @Html.ActionLink("Details", "Details", new { id = item.username }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.username })
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="4">
+            @Html.ActionLink("Add User", "Create", "AdminUser", new { area = "Admin"}, null)
+        </td>
+    </tr>
+
+</table>

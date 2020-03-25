@@ -1,0 +1,28 @@
+﻿@using (Ajax.BeginForm("QuickSearchJobs", "SearchJobs", new { area = "JobSeeker" },
+ new AjaxOptions
+ {
+     HttpMethod = "GET", // HttpMethod to use, GET or POST
+UpdateTargetId = "divJobs", // ID of the HTML element to update
+InsertionMode = InsertionMode.Replace, // Replace the existing contents
+LoadingElementId = "divloading",
+     OnBegin = "ClearDivJobs"
+ }))
+{
+    <div class="row text-left">
+        <div class="col-sm-12 col-md-3 mb-1">
+            Industry:  @Html.DropDownList("Industry", "Select Industry")
+        </div>
+        <div class="col-sm-12 col-md-3 mb-1">
+            Area:      @Html.DropDownList("Area1", "Select Area")
+        </div>
+        <div class="col-sm-12 col-md-3 mb-1">
+            Job Type:  @Html.DropDownList("JobType", "Select Job Type")
+        </div>
+        <div class="col-sm-12 col-md-2 mb-1">
+            Location:  @Html.DropDownList("Location", "Select Location")
+        </div>
+        <div class="col-sm-12 col-md-1 mb-1">
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+    </div>
+}

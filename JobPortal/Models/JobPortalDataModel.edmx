@@ -1,0 +1,660 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="area_id" />
+          </Key>
+          <Property Name="area_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category_id" Type="int" />
+          <Property Name="area_name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CandidateBasic">
+          <Key>
+            <PropertyRef Name="candidateId" />
+          </Key>
+          <Property Name="candidateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="quesId" Type="int" />
+          <Property Name="ansr" Type="nvarchar" MaxLength="50" />
+          <Property Name="profileDate" Type="datetime" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="20" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="15" />
+          <Property Name="candidateAddr" Type="nvarchar" MaxLength="100" />
+          <Property Name="gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="dob" Type="datetime" />
+          <Property Name="contactNo" Type="int" />
+          <Property Name="emailId" Type="nvarchar" MaxLength="30" />
+          <Property Name="city" Type="nvarchar" MaxLength="20" />
+          <Property Name="resumePath" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="CandidateEducation">
+          <Key>
+            <PropertyRef Name="candidateEduId" />
+          </Key>
+          <Property Name="candidateEduId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="candidateId" Type="int" />
+          <Property Name="aLevelSubject1" Type="nvarchar" MaxLength="20" />
+          <Property Name="aLevelSubject2" Type="nvarchar" MaxLength="20" />
+          <Property Name="aLevelSubject3" Type="nvarchar" MaxLength="20" />
+          <Property Name="aLevelGrade1" Type="int" />
+          <Property Name="aLevelGrade2" Type="int" />
+          <Property Name="aLevelGrade3" Type="int" />
+          <Property Name="graduation" Type="nvarchar" MaxLength="50" />
+          <Property Name="instituteGrad" Type="nvarchar" MaxLength="50" />
+          <Property Name="percentageGrad" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="postGrad" Type="nvarchar" MaxLength="50" />
+          <Property Name="institutePostGrad" Type="nvarchar" MaxLength="50" />
+          <Property Name="percentagePostGrad" Type="numeric" Precision="4" Scale="2" />
+          <Property Name="certification" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CandidateProfessional">
+          <Key>
+            <PropertyRef Name="candidateProfId" />
+          </Key>
+          <Property Name="candidateProfId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="candidateId" Type="int" />
+          <Property Name="areaId" Type="int" />
+          <Property Name="experienceYears" Type="int" />
+          <Property Name="experienceMonth" Type="int" />
+          <Property Name="salary" Type="int" />
+          <Property Name="industry" Type="nvarchar" MaxLength="50" />
+          <Property Name="industryRole" Type="nvarchar" MaxLength="50" />
+          <Property Name="skills" Type="varchar" MaxLength="50" />
+          <Property Name="company" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category_name" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="companyId" />
+          </Key>
+          <Property Name="companyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="companyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="quesId" Type="int" />
+          <Property Name="ansr" Type="nvarchar" MaxLength="50" />
+          <Property Name="contactPerson" Type="nvarchar" MaxLength="50" />
+          <Property Name="companyContact" Type="int" />
+          <Property Name="companyAddr" Type="nvarchar" MaxLength="100" />
+          <Property Name="companyEmail" Type="nvarchar" MaxLength="100" />
+          <Property Name="companyDetails" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="JobPost">
+          <Key>
+            <PropertyRef Name="jobPostId" />
+          </Key>
+          <Property Name="jobPostId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoryId" Type="int" />
+          <Property Name="areaid" Type="int" />
+          <Property Name="companyId" Type="int" />
+          <Property Name="jobTitleId" Type="int" />
+          <Property Name="type" Type="nvarchar" MaxLength="20" />
+          <Property Name="location" Type="nvarchar" MaxLength="50" />
+          <Property Name="postedDate" Type="datetime" />
+          <Property Name="skillsReq" Type="nvarchar" MaxLength="100" />
+          <Property Name="educationReq" Type="nvarchar(max)" />
+          <Property Name="description" Type="nvarchar(max)" />
+          <Property Name="contactEmail" Type="nvarchar" MaxLength="50" />
+          <Property Name="salary" Type="int" />
+          <Property Name="isAvailable" Type="bit" />
+        </EntityType>
+        <EntityType Name="JobTitle">
+          <Key>
+            <PropertyRef Name="jobtitleId" />
+          </Key>
+          <Property Name="jobtitleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="jobtitleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="jobtitleAreaID" Type="int" />
+          <Property Name="jobtitleCategoryId" Type="int" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="quesId" />
+          </Key>
+          <Property Name="quesId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ques" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Area__category_i__52593CB8">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Area" Type="Self.Area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="Area">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JobPost__areaid__59FA5E80">
+          <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+          <End Role="JobPost" Type="Self.JobPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="area_id" />
+            </Principal>
+            <Dependent Role="JobPost">
+              <PropertyRef Name="areaid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JobPost__categor__59063A47">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="JobPost" Type="Self.JobPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="JobPost">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JobPost__jobTitl__5AEE82B9">
+          <End Role="JobTitle" Type="Self.JobTitle" Multiplicity="0..1" />
+          <End Role="JobPost" Type="Self.JobPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobTitle">
+              <PropertyRef Name="jobtitleId" />
+            </Principal>
+            <Dependent Role="JobPost">
+              <PropertyRef Name="jobTitleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JobTitle__jobtit__534D60F1">
+          <End Role="Area" Type="Self.Area" Multiplicity="0..1" />
+          <End Role="JobTitle" Type="Self.JobTitle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="area_id" />
+            </Principal>
+            <Dependent Role="JobTitle">
+              <PropertyRef Name="jobtitleAreaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JobTitle__jobtit__5441852A">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="JobTitle" Type="Self.JobTitle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="JobTitle">
+              <PropertyRef Name="jobtitleCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelsStoreContainer">
+          <EntitySet Name="Area" EntityType="Self.Area" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CandidateBasic" EntityType="Self.CandidateBasic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CandidateEducation" EntityType="Self.CandidateEducation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CandidateProfessional" EntityType="Self.CandidateProfessional" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobPost" EntityType="Self.JobPost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobTitle" EntityType="Self.JobTitle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Area__category_i__52593CB8" Association="Self.FK__Area__category_i__52593CB8">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Area" EntitySet="Area" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JobPost__areaid__59FA5E80" Association="Self.FK__JobPost__areaid__59FA5E80">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="JobPost" EntitySet="JobPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JobPost__categor__59063A47" Association="Self.FK__JobPost__categor__59063A47">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="JobPost" EntitySet="JobPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JobPost__jobTitl__5AEE82B9" Association="Self.FK__JobPost__jobTitl__5AEE82B9">
+            <End Role="JobTitle" EntitySet="JobTitle" />
+            <End Role="JobPost" EntitySet="JobPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JobTitle__jobtit__534D60F1" Association="Self.FK__JobTitle__jobtit__534D60F1">
+            <End Role="Area" EntitySet="Area" />
+            <End Role="JobTitle" EntitySet="JobTitle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JobTitle__jobtit__5441852A" Association="Self.FK__JobTitle__jobtit__5441852A">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="JobTitle" EntitySet="JobTitle" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="companyId" />
+          </Key>
+          <Property Name="companyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="companyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="quesId" Type="Int32" />
+          <Property Name="ansr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="contactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="companyContact" Type="Int32" />
+          <Property Name="companyAddr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="companyEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="companyDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="quesId" />
+          </Key>
+          <Property Name="quesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ques" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="JobPortalDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Areas" EntityType="Models.Area" />
+          <EntitySet Name="Categories" EntityType="Models.Category" />
+          <AssociationSet Name="FK__Area__category_i__48CFD27E" Association="Models.FK__Area__category_i__48CFD27E">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Area" EntitySet="Areas" />
+          </AssociationSet>
+          <EntitySet Name="CandidateEducation" EntityType="Models.CandidateEducation" />
+          <EntitySet Name="CandidateProfessional" EntityType="Models.CandidateProfessional" />
+          <EntitySet Name="CandidateBasic" EntityType="Models.CandidateBasic" />
+          <EntitySet Name="JobTitles" EntityType="Models.JobTitle" />
+          <AssociationSet Name="FK__JobTitle__jobtit__534D60F1" Association="Models.FK__JobTitle__jobtit__534D60F1">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="JobTitle" EntitySet="JobTitles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JobTitle__jobtit__5441852A" Association="Models.FK__JobTitle__jobtit__5441852A">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="JobTitle" EntitySet="JobTitles" />
+          </AssociationSet>
+          <EntitySet Name="JobPosts" EntityType="Models.JobPost" />
+          <AssociationSet Name="FK__JobPost__areaid__59FA5E80" Association="Models.FK__JobPost__areaid__59FA5E80">
+            <End Role="Area" EntitySet="Areas" />
+            <End Role="JobPost" EntitySet="JobPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JobPost__categor__59063A47" Association="Models.FK__JobPost__categor__59063A47">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="JobPost" EntitySet="JobPosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__JobPost__jobTitl__5AEE82B9" Association="Models.FK__JobPost__jobTitl__5AEE82B9">
+            <End Role="JobTitle" EntitySet="JobTitles" />
+            <End Role="JobPost" EntitySet="JobPosts" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Area">
+          <Key>
+            <PropertyRef Name="area_id" />
+          </Key>
+          <Property Name="area_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category_id" Type="Int32" />
+          <Property Name="area_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category" Relationship="Models.FK__Area__category_i__48CFD27E" FromRole="Area" ToRole="Category" />
+          <NavigationProperty Name="JobTitles" Relationship="Models.FK__JobTitle__jobtit__534D60F1" FromRole="Area" ToRole="JobTitle" />
+          <NavigationProperty Name="JobPosts" Relationship="Models.FK__JobPost__areaid__59FA5E80" FromRole="Area" ToRole="JobPost" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="category_id" />
+          </Key>
+          <Property Name="category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Areas" Relationship="Models.FK__Area__category_i__48CFD27E" FromRole="Category" ToRole="Area" />
+          <NavigationProperty Name="JobTitles" Relationship="Models.FK__JobTitle__jobtit__5441852A" FromRole="Category" ToRole="JobTitle" />
+          <NavigationProperty Name="JobPosts" Relationship="Models.FK__JobPost__categor__59063A47" FromRole="Category" ToRole="JobPost" />
+        </EntityType>
+        <Association Name="FK__Area__category_i__48CFD27E">
+          <End Type="Models.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="Models.Area" Role="Area" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="Area">
+              <PropertyRef Name="category_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CandidateEducation">
+          <Key>
+            <PropertyRef Name="candidateEduId" />
+          </Key>
+          <Property Name="candidateEduId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="candidateId" Type="Int32" />
+          <Property Name="aLevelSubject1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="aLevelSubject2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="aLevelSubject3" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="aLevelGrade1" Type="Int32" />
+          <Property Name="aLevelGrade2" Type="Int32" />
+          <Property Name="aLevelGrade3" Type="Int32" />
+          <Property Name="graduation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="instituteGrad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="percentageGrad" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="postGrad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="institutePostGrad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="percentagePostGrad" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="certification" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CandidateProfessional">
+          <Key>
+            <PropertyRef Name="candidateProfId" />
+          </Key>
+          <Property Name="candidateProfId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="candidateId" Type="Int32" />
+          <Property Name="areaId" Type="Int32" />
+          <Property Name="experienceYears" Type="Int32" />
+          <Property Name="experienceMonth" Type="Int32" />
+          <Property Name="salary" Type="Int32" />
+          <Property Name="industry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="industryRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="skills" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="company" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CandidateBasic">
+          <Key>
+            <PropertyRef Name="candidateId" />
+          </Key>
+          <Property Name="candidateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="quesId" Type="Int32" />
+          <Property Name="ansr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="profileDate" Type="DateTime" Precision="3" />
+          <Property Name="firstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="candidateAddr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="dob" Type="DateTime" Precision="3" />
+          <Property Name="contactNo" Type="Int32" />
+          <Property Name="emailId" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="resumePath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="JobTitle">
+          <Key>
+            <PropertyRef Name="jobtitleId" />
+          </Key>
+          <Property Name="jobtitleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="jobtitleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="jobtitleAreaID" Type="Int32" />
+          <NavigationProperty Name="Area" Relationship="Models.FK__JobTitle__jobtit__534D60F1" FromRole="JobTitle" ToRole="Area" />
+          <Property Name="jobtitleCategoryId" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Models.FK__JobTitle__jobtit__5441852A" FromRole="JobTitle" ToRole="Category" />
+          <NavigationProperty Name="JobPosts" Relationship="Models.FK__JobPost__jobTitl__5AEE82B9" FromRole="JobTitle" ToRole="JobPost" />
+        </EntityType>
+        <Association Name="FK__JobTitle__jobtit__534D60F1">
+          <End Type="Models.Area" Role="Area" Multiplicity="0..1" />
+          <End Type="Models.JobTitle" Role="JobTitle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="area_id" />
+            </Principal>
+            <Dependent Role="JobTitle">
+              <PropertyRef Name="jobtitleAreaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JobTitle__jobtit__5441852A">
+          <End Type="Models.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="Models.JobTitle" Role="JobTitle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="JobTitle">
+              <PropertyRef Name="jobtitleCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="JobPost">
+          <Key>
+            <PropertyRef Name="jobPostId" />
+          </Key>
+          <Property Name="jobPostId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoryId" Type="Int32" />
+          <Property Name="areaid" Type="Int32" />
+          <Property Name="companyId" Type="Int32" />
+          <Property Name="jobTitleId" Type="Int32" />
+          <Property Name="type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="postedDate" Type="DateTime" Precision="3" />
+          <Property Name="skillsReq" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="educationReq" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="contactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="salary" Type="Int32" />
+          <Property Name="isAvailable" Type="Boolean" />
+          <NavigationProperty Name="Area" Relationship="Models.FK__JobPost__areaid__59FA5E80" FromRole="JobPost" ToRole="Area" />
+          <NavigationProperty Name="Category" Relationship="Models.FK__JobPost__categor__59063A47" FromRole="JobPost" ToRole="Category" />
+          <NavigationProperty Name="JobTitle" Relationship="Models.FK__JobPost__jobTitl__5AEE82B9" FromRole="JobPost" ToRole="JobTitle" />
+        </EntityType>
+        <Association Name="FK__JobPost__areaid__59FA5E80">
+          <End Type="Models.Area" Role="Area" Multiplicity="0..1" />
+          <End Type="Models.JobPost" Role="JobPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Area">
+              <PropertyRef Name="area_id" />
+            </Principal>
+            <Dependent Role="JobPost">
+              <PropertyRef Name="areaid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JobPost__categor__59063A47">
+          <End Type="Models.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="Models.JobPost" Role="JobPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="category_id" />
+            </Principal>
+            <Dependent Role="JobPost">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__JobPost__jobTitl__5AEE82B9">
+          <End Type="Models.JobTitle" Role="JobTitle" Multiplicity="0..1" />
+          <End Type="Models.JobPost" Role="JobPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobTitle">
+              <PropertyRef Name="jobtitleId" />
+            </Principal>
+            <Dependent Role="JobPost">
+              <PropertyRef Name="jobTitleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="JobPortalDBContext">
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="Models.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="companyName" ColumnName="companyName" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="quesId" ColumnName="quesId" />
+                <ScalarProperty Name="ansr" ColumnName="ansr" />
+                <ScalarProperty Name="contactPerson" ColumnName="contactPerson" />
+                <ScalarProperty Name="companyContact" ColumnName="companyContact" />
+                <ScalarProperty Name="companyAddr" ColumnName="companyAddr" />
+                <ScalarProperty Name="companyEmail" ColumnName="companyEmail" />
+                <ScalarProperty Name="companyDetails" ColumnName="companyDetails" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="Models.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="quesId" ColumnName="quesId" />
+                <ScalarProperty Name="ques" ColumnName="ques" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Models.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Areas">
+            <EntityTypeMapping TypeName="Models.Area">
+              <MappingFragment StoreEntitySet="Area">
+                <ScalarProperty Name="area_name" ColumnName="area_name" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+                <ScalarProperty Name="area_id" ColumnName="area_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="Models.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="category_name" ColumnName="category_name" />
+                <ScalarProperty Name="category_id" ColumnName="category_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CandidateEducation">
+            <EntityTypeMapping TypeName="Models.CandidateEducation">
+              <MappingFragment StoreEntitySet="CandidateEducation">
+                <ScalarProperty Name="certification" ColumnName="certification" />
+                <ScalarProperty Name="percentagePostGrad" ColumnName="percentagePostGrad" />
+                <ScalarProperty Name="institutePostGrad" ColumnName="institutePostGrad" />
+                <ScalarProperty Name="postGrad" ColumnName="postGrad" />
+                <ScalarProperty Name="percentageGrad" ColumnName="percentageGrad" />
+                <ScalarProperty Name="instituteGrad" ColumnName="instituteGrad" />
+                <ScalarProperty Name="graduation" ColumnName="graduation" />
+                <ScalarProperty Name="aLevelGrade3" ColumnName="aLevelGrade3" />
+                <ScalarProperty Name="aLevelGrade2" ColumnName="aLevelGrade2" />
+                <ScalarProperty Name="aLevelGrade1" ColumnName="aLevelGrade1" />
+                <ScalarProperty Name="aLevelSubject3" ColumnName="aLevelSubject3" />
+                <ScalarProperty Name="aLevelSubject2" ColumnName="aLevelSubject2" />
+                <ScalarProperty Name="aLevelSubject1" ColumnName="aLevelSubject1" />
+                <ScalarProperty Name="candidateId" ColumnName="candidateId" />
+                <ScalarProperty Name="candidateEduId" ColumnName="candidateEduId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CandidateProfessional">
+            <EntityTypeMapping TypeName="Models.CandidateProfessional">
+              <MappingFragment StoreEntitySet="CandidateProfessional">
+                <ScalarProperty Name="company" ColumnName="company" />
+                <ScalarProperty Name="skills" ColumnName="skills" />
+                <ScalarProperty Name="industryRole" ColumnName="industryRole" />
+                <ScalarProperty Name="industry" ColumnName="industry" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="experienceMonth" ColumnName="experienceMonth" />
+                <ScalarProperty Name="experienceYears" ColumnName="experienceYears" />
+                <ScalarProperty Name="areaId" ColumnName="areaId" />
+                <ScalarProperty Name="candidateId" ColumnName="candidateId" />
+                <ScalarProperty Name="candidateProfId" ColumnName="candidateProfId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CandidateBasic">
+            <EntityTypeMapping TypeName="Models.CandidateBasic">
+              <MappingFragment StoreEntitySet="CandidateBasic">
+                <ScalarProperty Name="resumePath" ColumnName="resumePath" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="emailId" ColumnName="emailId" />
+                <ScalarProperty Name="contactNo" ColumnName="contactNo" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="candidateAddr" ColumnName="candidateAddr" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="profileDate" ColumnName="profileDate" />
+                <ScalarProperty Name="ansr" ColumnName="ansr" />
+                <ScalarProperty Name="quesId" ColumnName="quesId" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="candidateId" ColumnName="candidateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobTitles">
+            <EntityTypeMapping TypeName="Models.JobTitle">
+              <MappingFragment StoreEntitySet="JobTitle">
+                <ScalarProperty Name="jobtitleCategoryId" ColumnName="jobtitleCategoryId" />
+                <ScalarProperty Name="jobtitleAreaID" ColumnName="jobtitleAreaID" />
+                <ScalarProperty Name="jobtitleName" ColumnName="jobtitleName" />
+                <ScalarProperty Name="jobtitleId" ColumnName="jobtitleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobPosts">
+            <EntityTypeMapping TypeName="Models.JobPost">
+              <MappingFragment StoreEntitySet="JobPost">
+                <ScalarProperty Name="isAvailable" ColumnName="isAvailable" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="contactEmail" ColumnName="contactEmail" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="educationReq" ColumnName="educationReq" />
+                <ScalarProperty Name="skillsReq" ColumnName="skillsReq" />
+                <ScalarProperty Name="postedDate" ColumnName="postedDate" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="jobTitleId" ColumnName="jobTitleId" />
+                <ScalarProperty Name="companyId" ColumnName="companyId" />
+                <ScalarProperty Name="areaid" ColumnName="areaid" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="jobPostId" ColumnName="jobPostId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

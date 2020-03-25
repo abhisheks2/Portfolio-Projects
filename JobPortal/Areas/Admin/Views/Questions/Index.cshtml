@@ -1,0 +1,35 @@
+﻿@model IEnumerable<JobPortal.Models.Question>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Secret Questions</h2>
+
+<table class="table">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.ques)
+        </th>
+        <th class="text-center">Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ques)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.quesId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.quesId })
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="2">
+            @Html.ActionLink("Add New Secret Question", "Create", "Questions", new { area = "Admin"}, null)
+        </td>
+    </tr>
+
+</table>
