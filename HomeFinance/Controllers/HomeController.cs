@@ -9,12 +9,13 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace HomeFinance.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly IExpenseLimitRepository _expenseLimitRepository;
         private readonly IExpenseRepository _expenseRepository;
         private List<DashboardViewModel> model;
-
+        private string userName;
         public HomeController(IExpenseLimitRepository expenseLimitRepository, IExpenseRepository expenseRepository)
         {
             _expenseLimitRepository = expenseLimitRepository;
@@ -24,8 +25,16 @@ namespace HomeFinance.Controllers
 
         public IActionResult Index()
         {
-            List<Expense> expenses = _expenseRepository.GetExpensesAll(User.Identity.Name).ToList();
-            IEnumerable<ExpenseLimit> expenseLimitList = _expenseLimitRepository.GetExpenseLimitsAll(User.Identity.Name);
+            if (string.IsNullOrEmpty(User.Identity.Name))
+            {
+                userName = "abhisheks2@gmail.com";
+            }
+            else
+            {
+                userName = User.Identity.Name;
+            }
+            List<Expense> expenses = _expenseRepository.GetExpensesAll(userName).ToList();
+            IEnumerable<ExpenseLimit> expenseLimitList = _expenseLimitRepository.GetExpenseLimitsAll(userName);
             foreach (var expenseLimit in expenseLimitList)
             {
                 DashboardViewModel viewModel = new DashboardViewModel();

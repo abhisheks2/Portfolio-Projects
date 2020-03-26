@@ -35,11 +35,14 @@ namespace HomeFinance
                 options => options.UseSqlServer(_config.GetConnectionString("householdBudgetDBConnection")));
             
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
-            
-            services.AddControllersWithViews(options => {
+
+            services.AddControllersWithViews(options =>
+            {
                 var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
                 options.Filters.Add(new AuthorizeFilter(policy));
             });
+
+            //services.AddControllersWithViews();
 
             services.AddAuthorization(options =>
             {

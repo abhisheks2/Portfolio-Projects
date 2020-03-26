@@ -5,12 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HomeFinance.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace HomeFinance.Controllers
 {
+    [AllowAnonymous]
     public class ExpenseLimitController : Controller
     {
         private readonly IExpenseLimitRepository _expenseLimitRepository;
+        private string userName;
 
         public ExpenseLimitController(IExpenseLimitRepository expenseLimitRepository)
         {
@@ -19,21 +22,37 @@ namespace HomeFinance.Controllers
 
         public ViewResult Index()
         {
-            IEnumerable<ExpenseLimit> model = _expenseLimitRepository.GetExpenseLimitsAll(User.Identity.Name);
+            if (string.IsNullOrEmpty(User.Identity.Name))
+            {
+                userName = "abhisheks2@gmail.com";
+            }
+            else
+            {
+                userName = User.Identity.Name;
+            }
+            IEnumerable<ExpenseLimit> model = _expenseLimitRepository.GetExpenseLimitsAll(userName);
             return View(model);
         }
 
         [HttpPost]
         public IActionResult Delete(int Id)
         {
-            ExpenseLimit expenseLimit = _expenseLimitRepository.GetExpenseLimitById(Id, User.Identity.Name);
+            if (string.IsNullOrEmpty(User.Identity.Name))
+            {
+                userName = "abhisheks2@gmail.com";
+            }
+            else
+            {
+                userName = User.Identity.Name;
+            }
+            ExpenseLimit expenseLimit = _expenseLimitRepository.GetExpenseLimitById(Id, userName);
             if (expenseLimit == null)
             {
                 Response.StatusCode = 404;
                 ViewBag.ErrorMessage = $"ExpenseLimit with Id = {Id} cannot be found";
                 return View("NotFound");
             }
-            ExpenseLimit expenseLimitDeleted = _expenseLimitRepository.Delete(Id, User.Identity.Name);
+            ExpenseLimit expenseLimitDeleted = _expenseLimitRepository.Delete(Id, userName);
             return RedirectToAction("Index");
         }
 
@@ -48,11 +67,19 @@ namespace HomeFinance.Controllers
         {
             if (ModelState.IsValid)
             {
-                IEnumerable<ExpenseLimit> expenseLimits = _expenseLimitRepository.GetExpenseLimitsAll(User.Identity.Name);
+                if (string.IsNullOrEmpty(User.Identity.Name))
+                {
+                    userName = "abhisheks2@gmail.com";
+                }
+                else
+                {
+                    userName = User.Identity.Name;
+                }
+                IEnumerable<ExpenseLimit> expenseLimits = _expenseLimitRepository.GetExpenseLimitsAll(userName);
                 var result = expenseLimits.SingleOrDefault(el => el.ExpenseType == expenseLimit.ExpenseType);
                 if (result == null)
                 {
-                    expenseLimit.UserName = User.Identity.Name;
+                    expenseLimit.UserName = userName;
                     ExpenseLimit newexpenseLimit = _expenseLimitRepository.Add(expenseLimit);
                     return RedirectToAction("Index");
                 }
@@ -67,7 +94,15 @@ namespace HomeFinance.Controllers
         [HttpGet]
         public ViewResult Edit(int Id)
         {
-            ExpenseLimit expenseLimit = _expenseLimitRepository.GetExpenseLimitById(Id, User.Identity.Name);
+            if (string.IsNullOrEmpty(User.Identity.Name))
+            {
+                userName = "abhisheks2@gmail.com";
+            }
+            else
+            {
+                userName = User.Identity.Name;
+            }
+            ExpenseLimit expenseLimit = _expenseLimitRepository.GetExpenseLimitById(Id, userName);
             if (expenseLimit == null)
             {
                 Response.StatusCode = 404;
@@ -82,7 +117,15 @@ namespace HomeFinance.Controllers
         {
             if (ModelState.IsValid)
             {
-                expenseLimit.UserName = User.Identity.Name;
+                if (string.IsNullOrEmpty(User.Identity.Name))
+                {
+                    userName = "abhisheks2@gmail.com";
+                }
+                else
+                {
+                    userName = User.Identity.Name;
+                }
+                expenseLimit.UserName = userName;
                 ExpenseLimit updatedexpenseLimit = _expenseLimitRepository.Update(expenseLimit);
                 return RedirectToAction("Index");
             }

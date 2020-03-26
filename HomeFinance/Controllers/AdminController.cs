@@ -11,7 +11,7 @@ using System.Security.Claims;
 
 namespace HomeFinance.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [AllowAnonymous]
     public class AdminController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -21,6 +21,22 @@ namespace HomeFinance.Controllers
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
+        }
+
+        //Roles section - Begin
+        [HttpGet]
+        public IActionResult ListRoles()
+        {
+            List<IdentityRole> roles = new List<IdentityRole>();
+            if (!string.IsNullOrEmpty(User.Identity.Name) && User.Identity.Name == "abhisheks2@gmail.com")
+            {
+                roles = roleManager.Roles.ToList();
+            }
+            else
+            {
+                roles = roleManager.Roles.Where(r => r.Name != "Admin").ToList();
+            }
+            return View(roles);
         }
 
         [HttpGet]
@@ -49,13 +65,6 @@ namespace HomeFinance.Controllers
                 }
             }
             return View(model);
-        }
-
-        [HttpGet]
-        public IActionResult ListRoles()
-        {
-            var roles = roleManager.Roles;
-            return View(roles);
         }
 
         [HttpGet]
@@ -91,7 +100,6 @@ namespace HomeFinance.Controllers
             return View(model);
         }
 
-        // This action responds to HttpPost and receives EditRoleViewModel
         [HttpPost]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
@@ -203,10 +211,62 @@ namespace HomeFinance.Controllers
             return RedirectToAction("EditRole", new { Id = roleId });
         }
 
+        [HttpPost]
+        [Authorize(Policy = "DeleteRolePolicy")]
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                try
+                {
+                    var result = await roleManager.DeleteAsync(role);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("ListRoles");
+                    }
+
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+
+                    return View("ListRoles");
+                }
+                catch (DbUpdateException ex)
+                {
+                    ViewBag.ErrorMessage = $"Role {role.Name} is in use. Please remove users from the role and then try to delete";
+                    return View("ErrorView");
+                }
+
+            }
+        }
+
+        //Role section - Ends
+
+        //------------------------------------------------------------------------------------//
+
+        //User section - Begins
+
         [HttpGet]
         public IActionResult ListUsers()
         {
-            var users = userManager.Users;
+            List<IdentityUser> users = new List<IdentityUser>();
+            if (!string.IsNullOrEmpty(User.Identity.Name) && User.Identity.Name == "abhisheks2@gmail.com")
+            {
+                users = userManager.Users.ToList();
+            }
+            else
+            {
+                users = userManager.Users.Where(u => u.UserName != "abhisheks2@gmail.com").ToList();
+            }
             return View(users);
         }
 
@@ -270,6 +330,7 @@ namespace HomeFinance.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "DeleteRolePolicy")]
         public async Task<IActionResult> DeleteUser(string id)
         {
             var user = await userManager.FindByIdAsync(id);
@@ -294,44 +355,6 @@ namespace HomeFinance.Controllers
                 }
 
                 return View("ListUsers");
-            }
-        }
-
-        [HttpPost]
-        [Authorize(Policy = "DeleteRolePolicy")]
-        public async Task<IActionResult> DeleteRole(string id)
-        {
-            var role = await roleManager.FindByIdAsync(id);
-
-            if (role == null)
-            {
-                ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
-                return View("NotFound");
-            }
-            else
-            {
-                try
-                {
-                    var result = await roleManager.DeleteAsync(role);
-
-                    if (result.Succeeded)
-                    {
-                        return RedirectToAction("ListRoles");
-                    }
-
-                    foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-
-                    return View("ListRoles");
-                }
-                catch (DbUpdateException ex)
-                {
-                    ViewBag.ErrorMessage = $"Role {role.Name} is in use. Please remove users from the role and then try to delete";
-                    return View("ErrorView");
-                }
-
             }
         }
 

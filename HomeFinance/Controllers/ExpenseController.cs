@@ -10,11 +10,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace HomeFinance.Controllers
 {
+    [AllowAnonymous]
     public class ExpenseController : Controller
     {
         private readonly IExpenseRepository _expenseRepository;
 
         private readonly List<int> YearList;
+
+        private string userName;
 
         public ExpenseController(IExpenseRepository expenseRepository)
         {
@@ -30,7 +33,15 @@ namespace HomeFinance.Controllers
 
         public ViewResult Index(ExpenseListViewModel model)
         {
-            model.expenseList = _expenseRepository.GetExpensesAll(User.Identity.Name);
+            if (string.IsNullOrEmpty(User.Identity.Name))
+            {
+                userName = "abhisheks2@gmail.com";
+            }
+            else
+            {
+                userName = User.Identity.Name;
+            }
+            model.expenseList = _expenseRepository.GetExpensesAll(userName).OrderBy(e => e.ExpenseDate);
             ViewBag.YearList = new SelectList(YearList);
 
             if (model.searchCategory != null)
@@ -55,7 +66,15 @@ namespace HomeFinance.Controllers
 
         public ViewResult Details(int Id)
         {
-            Expense expense = _expenseRepository.GetExpenseById(Id, User.Identity.Name);
+            if (string.IsNullOrEmpty(User.Identity.Name))
+            {
+                userName = "abhisheks2@gmail.com";
+            }
+            else
+            {
+                userName = User.Identity.Name;
+            }
+            Expense expense = _expenseRepository.GetExpenseById(Id, userName);
             if (expense == null)
             {
                 Response.StatusCode = 404;
@@ -68,14 +87,22 @@ namespace HomeFinance.Controllers
         [HttpPost]
         public IActionResult Delete(int Id)
         {
-            Expense expense = _expenseRepository.GetExpenseById(Id, User.Identity.Name);
+            if (string.IsNullOrEmpty(User.Identity.Name))
+            {
+                userName = "abhisheks2@gmail.com";
+            }
+            else
+            {
+                userName = User.Identity.Name;
+            }
+            Expense expense = _expenseRepository.GetExpenseById(Id, userName);
             if (expense == null)
             {
                 Response.StatusCode = 404;
                 ViewBag.ErrorMessage = $"Expense with Id = {Id} cannot be found";
                 return View("NotFound");
             }
-            Expense expenseDeleted = _expenseRepository.Delete(Id, User.Identity.Name);
+            Expense expenseDeleted = _expenseRepository.Delete(Id, userName);
             return RedirectToAction("Index");
         }
 
@@ -88,9 +115,17 @@ namespace HomeFinance.Controllers
         [HttpPost]
         public IActionResult Create(Expense expense)
         {
+            if (string.IsNullOrEmpty(User.Identity.Name))
+            {
+                userName = "abhisheks2@gmail.com";
+            }
+            else
+            {
+                userName = User.Identity.Name;
+            }
             if (ModelState.IsValid)
             {
-                expense.UserName = User.Identity.Name;
+                expense.UserName = userName;
                 Expense newExpense = _expenseRepository.Add(expense);
                 return RedirectToAction("Index");
             }
@@ -100,7 +135,15 @@ namespace HomeFinance.Controllers
         [HttpGet]
         public ViewResult Edit(int Id)
         {
-            Expense expense = _expenseRepository.GetExpenseById(Id, User.Identity.Name);
+            if (string.IsNullOrEmpty(User.Identity.Name))
+            {
+                userName = "abhisheks2@gmail.com";
+            }
+            else
+            {
+                userName = User.Identity.Name;
+            }
+            Expense expense = _expenseRepository.GetExpenseById(Id, userName);
             if (expense == null)
             {
                 Response.StatusCode = 404;
@@ -115,7 +158,15 @@ namespace HomeFinance.Controllers
         {
             if (ModelState.IsValid)
             {
-                expense.UserName = User.Identity.Name;
+                if (string.IsNullOrEmpty(User.Identity.Name))
+                {
+                    userName = "abhisheks2@gmail.com";
+                }
+                else
+                {
+                    userName = User.Identity.Name;
+                }
+                expense.UserName = userName;
                 Expense updatedExpense = _expenseRepository.Update(expense);
                 return RedirectToAction("Index");
             }
