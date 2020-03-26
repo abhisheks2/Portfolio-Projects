@@ -331,7 +331,8 @@ hr.divider {
 /* contact CSS*/
 .contact-item {
     font-family: 'poppins', sans-serif;
-    color: black !important;
+    color: red !important;
+    text-decoration: underline;
 }
     .contact-item img {
         width: 35px;
@@ -339,28 +340,28 @@ hr.divider {
     }
 /*Fixed Background Image css*/
 #sec2 {
-    height: 100vh;
+    height: 70vh;
     background-image: url(../images/bandra-worli-sealink-India.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 #sec3 {
-    height: 100vh;
+    height: 70vh;
     background-image: url(../images/KeralaIndia.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 #sec4 {
-    height: 100vh;
+    height: 70vh;
     background-image: url(../images/lotustempleIndia.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 #sec5 {
-    height: 100vh;
+    height: 70vh;
     background-image: url(../images/tajmahalIndia.jpg);
     background-size: cover;
     background-position: center;
