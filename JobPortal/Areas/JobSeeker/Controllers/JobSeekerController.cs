@@ -30,7 +30,11 @@ namespace JobPortal.Areas.JobSeeker.Controllers
             }
             else
             {
-                return RedirectToAction("Login", "Home", new { area = "" });
+                Session["UserName"] = "jobseeker1";
+                Session["UserRole"] = "jobseeker";
+                ViewBag.UserName = Session["UserName"];
+                return View();
+                //return RedirectToAction("Login", "Home", new { area = "" });
             }
         }
 

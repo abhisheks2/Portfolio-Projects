@@ -21,7 +21,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Job Search", "JobSearch", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("Sign In/Register", "Login", "Home", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Job Seeker(without login)", "Index", "JobSeeker", new { area = "JobSeeker" }, null)</li>
+                    <li>@Html.ActionLink("Recruiter(without login)", "Index", "Recruiter", new { area = "Recruiter" }, null)</li>
+                    <li>@Html.ActionLink("Login/Register", "Login", "Home", new { area = "" }, null)</li>
                 </ul>
             </div>
         </div>
