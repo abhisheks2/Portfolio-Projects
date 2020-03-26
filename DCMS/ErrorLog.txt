@@ -1,1 +1,9 @@
-﻿
+﻿26/03/2020 20:16:58
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at DCMS.DCMSMasterPage.Page_Load(Object sender, EventArgs e) in C:\Users\Administrator\source\repos\Portfolio\DCMS\DCMSMasterPage.Master.cs:line 17
+   at System.Web.Util.CalliEventHandlerDelegateProxy.Callback(Object sender, EventArgs e)
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)
+----------------------------------------------------------------------------------------------------------------------------------
