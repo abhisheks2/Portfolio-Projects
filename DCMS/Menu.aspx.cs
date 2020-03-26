@@ -11,7 +11,15 @@ namespace DCMS
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            lblMessage.Text = Session["User"].ToString();
+            if (Session["User"].ToString() == "admin")
+            {
+                lblMessage.Text = "Administartor";
+            }
+            else
+            {
+                lblMessage.Text = "Dentist";
+            }
+            //lblMessage.Text = Session["User"].ToString();
         }
     }
 }

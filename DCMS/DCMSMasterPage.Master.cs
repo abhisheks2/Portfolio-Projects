@@ -13,7 +13,8 @@ namespace DCMS
         static string loggedIn = "";
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (loggedIn == "") loggedIn = Session["User"].ToString();
+            //if (loggedIn == "") loggedIn = Session["User"].ToString();
+            loggedIn = Session["User"].ToString();
             if (new UsersDAO().verifyAdmin(loggedIn))
             {
                 doctorsLink.Visible = true;
@@ -45,12 +46,16 @@ namespace DCMS
         }
         protected void homeImg_Click(object sender, ImageClickEventArgs e)
         {
+            loggedIn = "";
+            Session.Clear();
             Response.Redirect("Home.aspx");
         }
 
         protected void logoImg_Click(object sender, ImageClickEventArgs e)
         {
             //Response.Redirect("http://abhishekshrivastava.co.uk/");
+            loggedIn = "";
+            Session.Clear();
             Response.Redirect("Home.aspx");
         }
     }

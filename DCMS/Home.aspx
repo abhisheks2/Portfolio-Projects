@@ -35,13 +35,19 @@
         </div>
         <%--Body--%>
         <div class="container-fluid bodyBG">
-            <div class="col-sm-12 pt-2 pt-md-5 pb-md-2">
-                <asp:Button ID="btnAdmin" CssClass="btnHome" runat="server" Text="ADMIN/Staff" OnClick="btnAdmin_Click" />
+            <div class="col-sm-12 pt-2 pt-md-3 pb-md-2">
+                <asp:Button ID="btnAdmin" CssClass="btnHome" runat="server" Text="Admin (without login)" OnClick="btnAdmin_Click" />
+                <asp:Button ID="btnAdmin1" CssClass="btnHome" runat="server" Text="Admin (via login screen)" OnClick="btnAdmin1_Click" />
             </div>
-            <div class="col-sm-12 pt-2 pt-md-5 pb-md-2">
-                <asp:Button ID="btnPatientAccess" runat="server" CssClass="btnHome" Text="Existing Patient" OnClick="btnPatientAccess_Click" />
+            <div class="col-sm-12 pt-2 pt-md-3 pb-md-2">
+                <asp:Button ID="btnDentist" CssClass="btnHome" runat="server" Text="Dentist (without login)" OnClick="btnDentist_Click" />
+                <asp:Button ID="btnDentist1" CssClass="btnHome" runat="server" Text="Dentist (via login screen)" OnClick="btnDentist1_Click" />
             </div>
-            <div class="col-sm-12 pt-2 pt-md-5 pb-md-2">
+            <div class="col-sm-12 pt-2 pt-md-3 pb-md-2">
+                <asp:Button ID="btnDefaultPatient" runat="server" CssClass="btnHome" Text="Patient (without login)" OnClick="btnDefaultPatient_Click" />
+                <asp:Button ID="btnPatientAccess" runat="server" CssClass="btnHome" Text="Patient (via login screen)" OnClick="btnPatientAccess_Click" />
+            </div>
+            <div class="col-sm-12 pt-2 pt-md-3 pb-md-2">
                 <asp:Button ID="btnNewPatient" runat="server" CssClass="btnHome" Text="New Patient" OnClick="btnNewPatient_Click" />
             </div>
             <div class="col-sm-12 pt-md-5 pb-md-5"></div>
