@@ -4,118 +4,32 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Job Details</h2>
-
-<div>
-    <hr />
-    <dl class="dl-horizontal text-justify">
-        <dt>
-            @Html.DisplayNameFor(model => model.companyId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.companyId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.location)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.location)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.postedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.postedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.skillsReq)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.skillsReq)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.educationReq)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.educationReq)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.contactEmail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.contactEmail)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.salary)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.salary)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.isAvailable)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.isAvailable)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Area.area_name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Area.area_name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.category_name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category.category_name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.JobTitle.jobtitleName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.JobTitle.jobtitleName)
-        </dd>
-
-    </dl>
+<div class="row justify-content-center">
+    <div class="col-sm-6 col-md-offset-3">
+        <div class="card">
+            <div class="card-header text-center bg-primary">
+                <h2><b>Job Details</b></h2>
+            </div>
+            <div class="card-body text-center bg-success" style="padding:5px 0 5px 0">
+                @Html.HiddenFor(model => model.companyId)
+                <h4>Company Name         : @Html.DisplayFor(model => model.companyId) </h4>
+                <h4>Contact Person       : @Html.DisplayFor(model => model.type) </h4>
+                <h4>Contact Number       : @Html.DisplayFor(model => model.location) </h4>
+                <h4>Address              : @Html.DisplayFor(model => model.postedDate) </h4>
+                <h4>Company Email        : @Html.DisplayFor(model => model.skillsReq) </h4>
+                <h4>Company Details      : @Html.DisplayFor(model => model.educationReq) </h4>
+                <h4>Company Details      : @Html.DisplayFor(model => model.description) </h4>
+                <h4>Company Details      : @Html.DisplayFor(model => model.contactEmail) </h4>
+                <h4>Company Details      : @Html.DisplayFor(model => model.salary) </h4>
+                <h4>Company Details      : @Html.DisplayFor(model => model.isAvailable) </h4>
+                <h4>Company Details      : @Html.DisplayFor(model => model.Area.area_name) </h4>
+                <h4>Company Details      : @Html.DisplayFor(model => model.Category.category_name) </h4>
+                <h4>Company Details      : @Html.DisplayFor(model => model.JobTitle.jobtitleName) </h4>
+            </div>
+            <div class="card-footer text-center" style="margin-top:5px">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.jobPostId }, new { @class="btn btn-primary"})
+                @Html.ActionLink("Back to List", "Index", null, new { @class="btn btn-primary"})
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.jobPostId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

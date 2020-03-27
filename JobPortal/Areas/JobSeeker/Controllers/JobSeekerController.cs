@@ -26,13 +26,12 @@ namespace JobPortal.Areas.JobSeeker.Controllers
                 {
                     return RedirectToAction("Index", "Home", new { area = "" });
                 }
-
             }
             else
             {
                 Session["UserName"] = "jobseeker1";
                 Session["UserRole"] = "jobseeker";
-                ViewBag.UserName = Session["UserName"];
+                ViewBag.UserName = "Job Seeker";
                 return View();
                 //return RedirectToAction("Login", "Home", new { area = "" });
             }
@@ -172,6 +171,11 @@ namespace JobPortal.Areas.JobSeeker.Controllers
 
         public ActionResult JobSeekerProfile()
         {
+            if (Session["UserName"] == null)
+            {
+                Session["UserName"] = "jobseeker1";
+                Session["UserRole"] = "jobseeker";
+            }
             string UserName = Session["UserName"].ToString();
             CandidateBasic candidateBasic = new CandidateBasic();
             candidateBasic = db.CandidateBasic.Single(c => c.username == UserName);

@@ -4,71 +4,77 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit Profile</h2>
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <hr class="divider" />
     <div class="form-horizontal text-justify">
         @Html.HiddenFor(model => model.companyId)
         @Html.HiddenFor(model => model.username)
         @Html.HiddenFor(model => model.quesId)
         @Html.HiddenFor(model => model.ansr)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.companyName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.companyName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.companyName, "", new { @class = "text-danger" })
+        <div class="card col-md-8 col-md-offset-2">
+            <div class="card-header text-center bg-primary">
+                <h2><b>Edit Profile</b></h2>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.contactPerson, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.contactPerson, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.contactPerson, "", new { @class = "text-danger" })
+            <div class="card-body bg-success">
+                <div class="form-group" style="padding-top:10px">
+                    @Html.LabelFor(model => model.companyName, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.companyName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.companyName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.contactPerson, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.contactPerson, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.contactPerson, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.companyContact, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.companyContact, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.companyContact, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.companyAddr, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextAreaFor(model => model.companyAddr, 4, 30, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.companyAddr, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.companyEmail, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.companyEmail, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.companyEmail, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group" style="padding-bottom:10px">
+                    @Html.LabelFor(model => model.companyDetails, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextAreaFor(model => model.companyDetails, 4, 30, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.companyDetails, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.companyContact, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.companyContact, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.companyContact, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.companyAddr, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.companyAddr, 5, 30, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.companyAddr, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.companyEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.companyEmail, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.companyEmail, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.companyDetails, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.companyDetails, 5, 30, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.companyDetails, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10 text-left">
-                <input type="submit" value="Save" class="btn btn-default" /> |
-                @Html.ActionLink("Back", "RecruiterProfile")
+            <div class="card-footer text-center">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                        @Html.ActionLink("Back", "RecruiterProfile", null, new { @class = "btn btn-primary" })
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -76,12 +82,4 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script>
-        $(document).ready(function () {
-            var config = {
-                'style': 'border-width: .2rem;border-color: black;'
-            }
-            $('.divider').attr(config);
-        });
-    </script>
 }

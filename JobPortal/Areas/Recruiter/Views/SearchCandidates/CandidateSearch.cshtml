@@ -2,43 +2,46 @@
     ViewBag.Title = "CandidateSearch";
 }
 
-<h2>Candidate Search</h2>
-
-@Ajax.ActionLink("Candidates By Industry", "CandidatesByIndustry", "SearchCandidates",
-        new { area = "Recruiter" },
-        new AjaxOptions
-        {
-            HttpMethod = "GET", // HttpMethod to use, GET or POST
-            UpdateTargetId = "divSearchBy", // ID of the HTML element to update
-            InsertionMode = InsertionMode.Replace, // Replace the existing contents
-            LoadingElementId = "divloading",
-            OnBegin = "ClearDivs",
-            OnSuccess = "SaveSearchOption1"
-        })
-
-<span style="color:Blue">|</span>
-
-@Ajax.ActionLink("Quick Search", "QuickSearch", "SearchCandidates",
-        new { Industry = "", Skills = "", MinExp = "0", MaxExp = "0", area = "Recruiter" },
-        new AjaxOptions
-        {
-            HttpMethod = "GET", // HttpMethod to use, GET or POST
-            UpdateTargetId = "divSearchBy", // ID of the HTML element to update
-            InsertionMode = InsertionMode.Replace, // Replace the existing contents
-            LoadingElementId = "divloading",
-            OnBegin = "ClearDivs",
-            OnSuccess = "SaveSearchOption2"
-        })
-<br />
-<br />
-<div id="divloading" style="display:none;">
-    <img src="~/Images/spinner.gif" />
+<div class="row">
+    <div class="col-md-12">
+        <h2>Candidate Search</h2>
+    </div>
+    <div class="col-md-2 jobSearchItem">
+        @Ajax.ActionLink("Candidates By Industry", "CandidatesByIndustry", "SearchCandidates",
+                new { area = "Recruiter" },
+                new AjaxOptions
+                {
+                    HttpMethod = "GET", // HttpMethod to use, GET or POST
+                    UpdateTargetId = "divSearchBy", // ID of the HTML element to update
+                    InsertionMode = InsertionMode.Replace, // Replace the existing contents
+                    LoadingElementId = "divloading",
+                    OnBegin = "ClearDivs",
+                    OnSuccess = "SaveSearchOption1"
+                }, new { @class="btn btn-primary"})
+    </div>
+    <div class="col-md-2 jobSearchItem">
+        @Ajax.ActionLink("Quick Search", "QuickSearch", "SearchCandidates",
+                new { Industry = "", Skills = "", MinExp = "0", MaxExp = "0", area = "Recruiter" },
+                new AjaxOptions
+                {
+                    HttpMethod = "GET", // HttpMethod to use, GET or POST
+                    UpdateTargetId = "divSearchBy", // ID of the HTML element to update
+                    InsertionMode = InsertionMode.Replace, // Replace the existing contents
+                    LoadingElementId = "divloading",
+                    OnBegin = "ClearDivs",
+                    OnSuccess = "SaveSearchOption2"
+                }, new { @class="btn btn-primary"})
+    </div>
+    <br />
+    <div id="divloading" style="display:none;" class="col-md-12">
+        <img src="~/Images/spinner.gif" />
+    </div>
+    <br />
+    <div id="divSearchBy" class="col-md-12" style="border:2px solid blue;margin-top:5px"></div>
+    <br />
+    <br />
+    <div id="divCandidates"></div>
 </div>
-<br />
-<div id="divSearchBy"></div>
-<br />
-<br />
-<div id="divCandidates"></div>
 
 @section Scripts {
     <script>

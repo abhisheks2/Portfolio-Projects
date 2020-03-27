@@ -37,6 +37,7 @@ namespace JobPortal.Models
         public Nullable<int> experienceMonth { get; set; }
 
         [DisplayName("Salary")]
+        [DataType(DataType.Currency)]
         public Nullable<int> salary { get; set; }
 
         [Required]

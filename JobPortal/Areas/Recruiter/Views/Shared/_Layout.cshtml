@@ -20,9 +20,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Your Profile", "RecruiterProfile", "Recruiter", new { area = "Recruiter" }, null)</li>
+                    <li>@Html.ActionLink("Profile", "RecruiterProfile", "Recruiter", new { area = "Recruiter" }, null)</li>
                     <li>@Html.ActionLink("Search Candidates", "CandidateSearch", "SearchCandidates", new { area = "Recruiter" }, null)</li>
-                    <li>@Html.ActionLink("Post Job", "Index", "JobPosts", new { area = "Recruiter" }, null)</li>
+                    <li>@Html.ActionLink("Manage Jobs", "Index", "JobPosts", new { area = "Recruiter" }, null)</li>
                     <li>@Html.ActionLink("Sign Out", "SignOut", "Recruiter", new { area = "Recruiter" }, null)</li>
                     
                 </ul>
@@ -30,12 +30,9 @@
         </div>
     </div>
     <div class="container-fluid body-content">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                @RenderBody()
-            </div>
-        </div>
-
+        @RenderBody()
+    </div>
+    <div class="container-fluid">
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - JobPortal by <a href="http://abhishekshrivastava.co.uk/">abhishekshrivastava.co.uk</a></p>

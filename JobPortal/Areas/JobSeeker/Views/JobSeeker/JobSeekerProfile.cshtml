@@ -4,80 +4,29 @@
     ViewBag.Title = "JobSeekerProfile";
 }
 
-<h2>Your Profile</h2>
-
-<div>
-    <hr class="divider"/>
-    <dl class="dl-horizontal text-justify">
-        @Html.HiddenFor(model => model.candidateId)
-
-        <dt>
-            @Html.DisplayNameFor(model => model.firstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.firstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.lastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.lastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.candidateAddr)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.candidateAddr)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.gender)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.gender)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.dob)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dob)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.contactNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.contactNo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.emailId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.emailId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.city)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.city)
-        </dd>
-    </dl>
+<div class="row justify-content-center">
+    <div class="col-sm-6 col-md-offset-3">
+        <div class="card">
+            <div class="card-header text-center bg-primary">
+                <h2><b>Profile</b></h2>
+            </div>
+            <div class="card-body text-center bg-success" style="padding:5px 0 5px 0">
+                @Html.HiddenFor(model => model.candidateId)
+                <h4>First Name         : @Model.firstName</h4>
+                <h4>Last Name          : @Model.lastName</h4>
+                <h4>Gender             : @Model.gender</h4>
+                <h4>Birth Date         : @Html.DisplayFor(model => model.dob)</h4>
+                <h4>Contact Number     : @Model.contactNo</h4>
+                <h4>Email              : @Model.emailId</h4>
+                <h4>Address            : @Model.candidateAddr</h4>
+                <h4>City               : @Model.city</h4>
+            </div>
+            <div class="card-footer text-center" style="margin-top:5px">
+                @Html.ActionLink("Edit Profile", "EditProfile", new { candidateId = Model.candidateId }, new { @class="btn btn-primary"})
+                @Html.ActionLink("View Education Details", "ViewEducation", new { candidateId = Model.candidateId }, new { @class="btn btn-primary"})
+                @Html.ActionLink("View Experience Details", "ExperienceDetail", new { candidateId = Model.candidateId }, new { @class="btn btn-primary"})
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit Profile", "EditProfile", new { candidateId = Model.candidateId }) |
-    @Html.ActionLink("View Education Details", "ViewEducation", new { candidateId = Model.candidateId }) |
-    @Html.ActionLink("View Experience Details", "ExperienceDetail", new { candidateId = Model.candidateId })
-</p>
+

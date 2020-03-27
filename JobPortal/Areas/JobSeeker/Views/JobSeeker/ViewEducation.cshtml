@@ -4,116 +4,34 @@
     ViewBag.Title = "ViewEducation";
 }
 
-<h2>Education Details</h2>
-
-<div>
-    <hr />
-    @Html.HiddenFor(model => model.candidateEduId)
-    @Html.HiddenFor(model => model.candidateId)
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.aLevelSubject1)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.aLevelSubject1)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.aLevelGrade1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.aLevelGrade1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.aLevelSubject2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.aLevelSubject2)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.aLevelGrade2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.aLevelGrade2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.aLevelSubject3)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.aLevelSubject3)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.aLevelGrade3)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.aLevelGrade3)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.graduation)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.graduation)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.instituteGrad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.instituteGrad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.percentageGrad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.percentageGrad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.postGrad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.postGrad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.institutePostGrad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.institutePostGrad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.percentagePostGrad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.percentagePostGrad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.certification)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.certification)
-        </dd>
-    </dl>
+<div class="row justify-content-center">
+    <div class="col-sm-6 col-md-offset-3">
+        <div class="card">
+            @Html.HiddenFor(model => model.candidateEduId)
+            @Html.HiddenFor(model => model.candidateId)
+            <div class="card-header text-center bg-primary">
+                <h2><b>Education Details</b></h2>
+            </div>
+            <div class="card-body text-center bg-success" style="padding:5px 0 5px 0">
+                <h4>A Level Subject 1        : @Model.aLevelSubject1</h4>
+                <h4>A Level Subject 1 Grade  : @Model.aLevelGrade1</h4>
+                <h4>A Level Subject 2        : @Model.aLevelSubject2</h4>
+                <h4>A Level Subject 2 Grade  : @Model.aLevelGrade2</h4>
+                <h4>A Level Subject 3        : @Model.aLevelSubject3</h4>
+                <h4>A Level Subject 3 Grade  : @Model.aLevelGrade3</h4>
+                <h4>Graduation               : @Model.graduation</h4>
+                <h4>Graduation Institute/University : @Model.instituteGrad</h4>
+                <h4>Graduation Percentage : @Model.percentageGrad</h4>
+                <h4>Post Graduation  : @Model.postGrad</h4>
+                <h4>Post Graduation Institute/University : @Model.institutePostGrad</h4>
+                <h4>Post Graduation Percentage : @Model.percentagePostGrad</h4>
+                <h4>Certifications : @Model.certification</h4>
+            </div>
+            <div class="card-footer text-center" style="margin-top:5px">
+                @Html.ActionLink("Edit Education Details", "EditEducation", new { candidateId = Model.candidateId }, new { @class="btn btn-primary"})
+                @Html.ActionLink("View Experience Details", "ExperienceDetail", new { candidateId = Model.candidateId }, new { @class="btn btn-primary"})
+                @Html.ActionLink("View Personal Details", "JobSeekerProfile", null, new { @class="btn btn-primary"})
+            </div>
+        </div>
+    </div>
 </div>
-<p class="col-md-12">
-    @Html.ActionLink("Edit Education Details", "EditEducation", new { candidateId = Model.candidateId }) |
-    @Html.ActionLink("View Experience Details", "ExperienceDetail", new { candidateId = Model.candidateId }) |
-    @Html.ActionLink("View Personal Details", "JobSeekerProfile")
-</p>

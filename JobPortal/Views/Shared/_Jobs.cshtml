@@ -1,50 +1,61 @@
 ﻿@model IEnumerable<JobPortal.Models.JobPost>
 @if (Model != null)
 {
-    <div class="col-sm-12">
-        <table class="table table-responsive">
-            <tr>
-                <th class="text-center">
-                    @Html.DisplayNameFor(model => model.Category.category_name)
-                </th>
-                <th class="text-center">
-                    @Html.DisplayNameFor(model => model.Area.area_name)
-                </th>
-                <th class="text-center">
-                    @Html.DisplayNameFor(model => model.JobTitle.jobtitleName)
-                </th>
-                <th class="text-center">
-                    @Html.DisplayNameFor(model => model.type)
-                </th>
-                <th class="text-center">
-                    @Html.DisplayNameFor(model => model.location)
-                </th>
-                <th class="text-center">Actions</th>
-            </tr>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header text-center bg-primary">
+                    <h2><b>Jobs</b></h2>
+                </div>
+                <div class="card-body text-center bg-success" style="padding:5px 0 5px 0">
+                    <table class="table table-responsive">
+                        <tr>
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.Category.category_name)
+                            </th>
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.Area.area_name)
+                            </th>
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.JobTitle.jobtitleName)
+                            </th>
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.type)
+                            </th>
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.location)
+                            </th>
+                            <th class="text-center">Actions</th>
+                        </tr>
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.Category.category_name)
-                    </td>
-                    <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.Area.area_name)
-                    </td>
-                    <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.JobTitle.jobtitleName)
-                    </td>
-                    <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.type)
-                    </td>
-                    <td class="text-center">
-                        @Html.DisplayFor(modelItem => item.location)
-                    </td>
-                    <td class="text-center">
-                        @Html.ActionLink("Details", "JobDetails", new { id = item.jobPostId })
-                    </td>
-                </tr>
-            }
-        </table>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Category.category_name)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.Area.area_name)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.JobTitle.jobtitleName)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.type)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.location)
+                                </td>
+                                <td class="text-center">
+                                    @Html.ActionLink("Details", "JobDetails", "Home", new { id = item.jobPostId }, null)
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+                <div class="card-footer text-center" style="margin-top:5px">
+                </div>
+            </div>
+        </div>
     </div>
 }

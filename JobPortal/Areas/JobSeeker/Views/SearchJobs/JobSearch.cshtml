@@ -1,55 +1,55 @@
 ﻿@{
     ViewBag.Title = "JobSearch";
 }
-<div>
-    <h2>JobSearch</h2>
-
-    @Ajax.ActionLink("Jobs By Industry", "JobsByIndustry", "SearchJobs",
-        new { area = "JobSeeker" },
-        new AjaxOptions
-        {
-            HttpMethod = "GET", // HttpMethod to use, GET or POST
-            UpdateTargetId = "divJobLinks", // ID of the HTML element to update
-            InsertionMode = InsertionMode.Replace, // Replace the existing contents
-            LoadingElementId = "divloading",
-            OnBegin = "ClearDivJobLinks",
-            OnSuccess = "SaveSearchOption1"
-        })
-
-    <span style="color:Blue">|</span>
-
-    @Ajax.ActionLink("Jobs By Location", "JobsByLocation", "SearchJobs",
-        new { area = "JobSeeker" },
-        new AjaxOptions
-        {
-            HttpMethod = "GET", // HttpMethod to use, GET or POST
-            UpdateTargetId = "divJobLinks", // ID of the HTML element to update
-            InsertionMode = InsertionMode.Replace, // Replace the existing contents
-            LoadingElementId = "divloading",
-            OnBegin = "ClearDivJobLinks",
-            OnSuccess = "SaveSearchOption2"
-        })
-
-    <span style="color:Blue">|</span>
-
-    @Ajax.ActionLink("Quick Search", "QuickSearch", "SearchJobs",
-        new { industry = "", area1 = "", jobType = "", location = "", area = "JobSeeker" },
-        new AjaxOptions
-        {
-            HttpMethod = "GET", // HttpMethod to use, GET or POST
-            UpdateTargetId = "divJobLinks", // ID of the HTML element to update
-            InsertionMode = InsertionMode.Replace, // Replace the existing contents
-            LoadingElementId = "divloading",
-            OnBegin = "ClearDivJobLinks",
-            OnSuccess = "SaveSearchOption3"
-        })
+<div class="row">
+    <div class="col-md-12">
+        <h2>JobSearch</h2>
+    </div>
+    <div class="col-md-2 jobSearchItem">
+        @Ajax.ActionLink("Jobs By Industry", "JobsByIndustry", "SearchJobs",
+            new { area = "JobSeeker" },
+            new AjaxOptions
+            {
+                HttpMethod = "GET", // HttpMethod to use, GET or POST
+                UpdateTargetId = "divJobLinks", // ID of the HTML element to update
+                InsertionMode = InsertionMode.Replace, // Replace the existing contents
+                LoadingElementId = "divloading",
+                OnBegin = "ClearDivJobLinks",
+                OnSuccess = "SaveSearchOption1"
+            }, new { @class="btn btn-primary"})
+    </div>
+    <div class="col-md-2 jobSearchItem">
+        @Ajax.ActionLink("Jobs By Location", "JobsByLocation", "SearchJobs",
+            new { area = "JobSeeker" },
+            new AjaxOptions
+            {
+                HttpMethod = "GET", // HttpMethod to use, GET or POST
+                UpdateTargetId = "divJobLinks", // ID of the HTML element to update
+                InsertionMode = InsertionMode.Replace, // Replace the existing contents
+                LoadingElementId = "divloading",
+                OnBegin = "ClearDivJobLinks",
+                OnSuccess = "SaveSearchOption2"
+            }, new { @class="btn btn-primary"})
+    </div>
+    <div class="col-md-2 jobSearchItem">
+        @Ajax.ActionLink("Quick Search", "QuickSearch", "SearchJobs",
+            new { industry = "", area1 = "", jobType = "", location = "", area = "JobSeeker" },
+            new AjaxOptions
+            {
+                HttpMethod = "GET", // HttpMethod to use, GET or POST
+                UpdateTargetId = "divJobLinks", // ID of the HTML element to update
+                InsertionMode = InsertionMode.Replace, // Replace the existing contents
+                LoadingElementId = "divloading",
+                OnBegin = "ClearDivJobLinks",
+                OnSuccess = "SaveSearchOption3"
+            }, new { @class="btn btn-primary"})
+    </div>
     <br />
-    <br />
-    <div id="divloading" style="display:none;">
+    <div id="divloading" style="display:none;" class="col-md-12">
         <img src="~/Images/spinner.gif" />
     </div>
     <br />
-    <div id="divJobLinks"></div>
+    <div id="divJobLinks" class="col-md-12" style="border:2px solid blue;margin-top:5px"></div>
     <br />
     <br />
     <div id="divJobs"></div>

@@ -1,21 +1,19 @@
 ﻿@model IEnumerable<JobPortal.Models.DynamicActionLink>
 
-<ul class="ul_jobLinks text-left">
-    @if (Model != null)
+@if (Model != null)
+{
+    foreach (var item in Model)
     {
-        foreach (var item in Model)
-        {
-            <li>
-                @Ajax.ActionLink(item.LinkName, item.LinkAction,
-                    new { searchBy = item.LinkSearchBy, searchValue = item.LinkSearchValue },
-                    new AjaxOptions
-                    {
-                        HttpMethod = "GET", // HttpMethod to use, GET or POST
-                        UpdateTargetId = "divJobs", // ID of the HTML element to update
-                        InsertionMode = InsertionMode.Replace, // Replace the existing contents
-                        OnBegin = "ClearDivJobs"
-                    })
-            </li>
-        }
+        <div class="col-md-1" style="padding:5px 0px 5px 0px">
+            @Ajax.ActionLink(item.LinkName, item.LinkAction,
+                new { searchBy = item.LinkSearchBy, searchValue = item.LinkSearchValue },
+                new AjaxOptions
+                {
+                    HttpMethod = "GET", // HttpMethod to use, GET or POST
+                    UpdateTargetId = "divJobs", // ID of the HTML element to update
+                    InsertionMode = InsertionMode.Replace, // Replace the existing contents
+                    OnBegin = "ClearDivJobs"
+                }, new { style="text-decoration:underline"})
+        </div>
     }
-</ul>
+}

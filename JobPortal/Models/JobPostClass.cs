@@ -59,7 +59,6 @@ namespace JobPortal.Models
         [DataType(DataType.Currency)]
         public Nullable<int> salary { get; set; }
 
-        [Required]
         [DisplayName("Job still available")]
         public Nullable<bool> isAvailable { get; set; }
 

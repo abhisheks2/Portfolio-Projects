@@ -13,22 +13,7 @@ namespace JobPortal.Controllers
         JobPortalDBContext db = new JobPortalDBContext();
         public ActionResult Index()
         {
-            HttpCookie myCookie = new HttpCookie("mycookie");
-            myCookie.Value = "Creating cookie";
-            //myCookie.Expires = DateTime.Now.AddHours(1);
-            Response.Cookies.Add(myCookie);
-
-            HttpCookie myCookieLoc = new HttpCookie("mycookieLoc");
-            myCookieLoc.Value = "Creating cookie";
-            //myCookie.Expires = DateTime.Now.AddHours(1);
-            Response.Cookies.Add(myCookieLoc);
-
-            HttpCookie myCookieInd = new HttpCookie("mycookieInd");
-            myCookieInd.Value = "Creating cookie";
-            //myCookie.Expires = DateTime.Now.AddHours(1);
-            Response.Cookies.Add(myCookieInd);
-
-
+            
             return View();
         }
 
@@ -221,6 +206,20 @@ namespace JobPortal.Controllers
 
         public ActionResult JobSearch()
         {
+            HttpCookie myCookie = new HttpCookie("mycookie");
+            myCookie.Value = "";
+            //myCookie.Expires = DateTime.Now.AddHours(1);
+            Response.Cookies.Add(myCookie);
+
+            HttpCookie myCookieLoc = new HttpCookie("mycookieLoc");
+            myCookieLoc.Value = "";
+            //myCookie.Expires = DateTime.Now.AddHours(1);
+            Response.Cookies.Add(myCookieLoc);
+
+            HttpCookie myCookieInd = new HttpCookie("mycookieInd");
+            myCookieInd.Value = "";
+            //myCookie.Expires = DateTime.Now.AddHours(1);
+            Response.Cookies.Add(myCookieInd);
             return View();
         }
 
@@ -229,7 +228,7 @@ namespace JobPortal.Controllers
             List<JobPost> model = new List<JobPost>();
             if (searchBy == "location")
             {
-                model = db.JobPosts.Where(j => j.location == searchValue && j.isAvailable == true).OrderBy(x => x.postedDate).ToList();
+                model = db.JobPosts.Where(j => j.location == searchValue).OrderBy(x => x.postedDate).ToList();
                 HttpCookie myCookieLoc = new HttpCookie("mycookieLoc");
                 myCookieLoc.Value = searchValue;
                 //myCookie.Expires = DateTime.Now.AddHours(1);
@@ -237,7 +236,8 @@ namespace JobPortal.Controllers
             }
             else if (searchBy == "industry")
             {
-                int industry = Convert.ToInt32(searchValue);
+                int industry;
+                int.TryParse(searchValue, out industry);
                 model = db.JobPosts.Where(j => j.categoryId == industry).OrderBy(x => x.postedDate).ToList();
                 HttpCookie myCookieInd = new HttpCookie("mycookieInd");
                 myCookieInd.Value = searchValue;
@@ -250,7 +250,7 @@ namespace JobPortal.Controllers
         public PartialViewResult JobsByLocation()
         {
             List<DynamicActionLink> links = new List<DynamicActionLink>();
-            var jobLocations = db.JobPosts.Where(j => j.isAvailable == true).OrderBy(l => l.location).Select(x => x.location).Distinct().ToList();
+            var jobLocations = db.JobPosts.OrderBy(l => l.location).Select(x => x.location).Distinct().ToList();
             foreach (var joblocation in jobLocations)
             {
                 DynamicActionLink link = new DynamicActionLink();
@@ -268,7 +268,7 @@ namespace JobPortal.Controllers
         public PartialViewResult JobsByIndustry()
         {
             List<DynamicActionLink> links = new List<DynamicActionLink>();
-            var industries = db.Categories.OrderBy(c => c.category_name).ToList() ;
+            var industries = db.Categories.OrderBy(c => c.category_name).ToList();
             foreach (var industry in industries)
             {
                 DynamicActionLink link = new DynamicActionLink();
@@ -294,7 +294,7 @@ namespace JobPortal.Controllers
             ViewBag.Industry = new SelectList(db.Categories.OrderBy(c => c.category_name), "category_id", "category_name", industry);
             ViewBag.Area = new SelectList(db.Areas.OrderBy(a => a.area_name), "area_id", "area_name", area1);
             ViewBag.JobType = new SelectList(Enum.GetNames(typeof(JobType)), jobType);
-            ViewBag.Location = new SelectList(db.JobPosts.Where(j => j.isAvailable == true).OrderBy(l => l.location).Select(x => x.location).Distinct().ToList(), location);
+            ViewBag.Location = new SelectList(db.JobPosts.OrderBy(l => l.location).Select(x => x.location).Distinct().ToList(), location);
             return PartialView("_QuickSearch");
         }
 
@@ -310,12 +310,12 @@ namespace JobPortal.Controllers
             {
                 aId = Convert.ToInt32(Area);
             }
-            
-            var model = db.JobPosts.Where(j => 
+
+            var model = db.JobPosts.Where(j =>
                                 (Industry == "" || j.categoryId == catId)
-                            &&  (Area == "" || j.areaid == aId)
-                            &&  (JobType == "" || j.type == JobType)
-                            &&  (Location == "" || j.location == Location))
+                            && (Area == "" || j.areaid == aId)
+                            && (JobType == "" || j.type == JobType)
+                            && (Location == "" || j.location == Location))
                             .ToList();
 
             HttpCookie myCookie = new HttpCookie("mycookie");

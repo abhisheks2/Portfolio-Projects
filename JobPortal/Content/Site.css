@@ -35,8 +35,6 @@ textarea {
     margin-top:5px;
 }
 
-.ul_jobLinks li {
-    float: left;
-    margin-left: 20px;
-   text-decoration: underline;
+.jobSearchItem {
+    margin-bottom:2px;
 }

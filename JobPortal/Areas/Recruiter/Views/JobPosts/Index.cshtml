@@ -4,61 +4,71 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Jobs</h2>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header text-center bg-primary">
+                <h2><b>Jobs</b></h2>
+            </div>
+            <div class="card-body text-center bg-success" style="padding:5px 0 5px 0">
+                <table class="table table-responsive">
+                    <tr>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Category.category_name)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.Area.area_name)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.JobTitle.jobtitleName)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.type)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.location)
+                        </th>
+                        <th class="text-center">
+                            @Html.DisplayNameFor(model => model.isAvailable)
+                        </th>
+                        <th class="text-center">Actions</th>
+                    </tr>
 
-<table class="table">
-    <tr>
-        <th class="text-center">
-            @Html.DisplayNameFor(model => model.Category.category_name)
-        </th>
-        <th class="text-center">
-            @Html.DisplayNameFor(model => model.Area.area_name)
-        </th>
-        <th class="text-center">
-            @Html.DisplayNameFor(model => model.JobTitle.jobtitleName)
-        </th>
-        <th class="text-center">
-            @Html.DisplayNameFor(model => model.type)
-        </th>
-        <th class="text-center">
-            @Html.DisplayNameFor(model => model.location)
-        </th>
-        <th class="text-center">
-            @Html.DisplayNameFor(model => model.isAvailable)
-        </th>
-        <th class="text-center">Actions</th>
-    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Category.category_name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Area.area_name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.JobTitle.jobtitleName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.type)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.location)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.isAvailable)
+                            </td>
+                            <td>
+                                @Html.ActionLink("View", "Details", new { id = item.jobPostId }, new { @class="btn btn-primary m-1"})
+                                @Html.ActionLink("Edit", "Edit", new { id = item.jobPostId }, new { @class="btn btn-primary m-1"})
+                                @Html.ActionLink("Delete", "Delete", new { id = item.jobPostId }, new { @class="btn btn-danger m-1"})
+                            </td>
+                        </tr>
+                    }
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.category_name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Area.area_name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.JobTitle.jobtitleName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.isAvailable)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.jobPostId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.jobPostId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.jobPostId })
-            </td>
-        </tr>
-    }
+                </table>
+            </div>
+            <div class="card-footer text-center" style="margin-top:5px">
+                @Html.ActionLink("Post New Job", "Create", null, new { @class="btn btn-primary"})
+            </div>
+        </div>
+    </div>
+</div>
 
-</table>
-<p>
-    @Html.ActionLink("Post New Job", "Create")
-</p>

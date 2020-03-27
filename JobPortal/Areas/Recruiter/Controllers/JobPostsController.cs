@@ -46,8 +46,6 @@ namespace JobPortal.Areas.Recruiter.Controllers
         }
 
         // POST: Recruiter/JobPosts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "jobPostId,categoryId,areaid,companyId,jobTitleId,type,location,postedDate,skillsReq,educationReq,description,contactEmail,salary,isAvailable")] JobPost jobPost)

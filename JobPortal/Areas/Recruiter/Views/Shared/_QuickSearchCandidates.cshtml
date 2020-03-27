@@ -1,17 +1,27 @@
-﻿@using (Ajax.BeginForm("QuickSearchCandidates", "SearchCandidates",new { area = "Recruiter"},
+﻿@using (Ajax.BeginForm("QuickSearchCandidates", "SearchCandidates", new { area = "Recruiter" },
     new AjaxOptions
+    {
+        HttpMethod = "GET", // HttpMethod to use, GET or POST
+UpdateTargetId = "divCandidates", // ID of the HTML element to update
+InsertionMode = InsertionMode.Replace, // Replace the existing contents
+OnBegin = "CleardivCandidates"
+    }))
 {
-    HttpMethod = "GET", // HttpMethod to use, GET or POST
-    UpdateTargetId = "divCandidates", // ID of the HTML element to update
-    InsertionMode = InsertionMode.Replace, // Replace the existing contents
-    OnBegin = "CleardivCandidates"
-}))
-{
-    <div>
-        Industry:               @Html.DropDownList("Industry", "Select Industry")
-        Skills:                 @Html.TextBox("Skills", (string)ViewBag.skills)
-        Minimum Experience:     @Html.TextBox("MinExp", (string)ViewBag.minexp, new { type = "number" })
-        Maximum Experience:     @Html.TextBox("MaxExp", (string)ViewBag.maxexp, new { type = "number" })
-        <input type="submit" value="Search" class="btn btn-default" />
+    <div class="row text-left" style="padding:5px 0px 5px 0px">
+        <div class="col-sm-12 col-md-2 jobSearchItem">
+            Industry: @Html.DropDownList("Industry", "Select Industry")
+        </div>
+        <div class="col-sm-12 col-md-2 jobSearchItem">
+            Skills: @Html.TextBox("Skills", (string)ViewBag.skills)
+        </div>
+        <div class="col-sm-12 col-md-3 jobSearchItem">
+            Minimum Experience: @Html.TextBox("MinExp", (string)ViewBag.minexp, new { type = "number" })
+        </div>
+        <div class="col-sm-12 col-md-3 jobSearchItem">
+            Maximum Experience: @Html.TextBox("MaxExp", (string)ViewBag.maxexp, new { type = "number" })
+        </div>
+        <div class="col-sm-12 col-md-1 jobSearchItem">
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
     </div>
 }

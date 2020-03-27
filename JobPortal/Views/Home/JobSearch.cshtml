@@ -1,51 +1,52 @@
 ﻿@{
     ViewBag.Title = "JobSearch";
 }
-<div>
-    <h2>JobSearch</h2>
-
-    @Ajax.ActionLink("Jobs By Industry", "JobsByIndustry",
-        new AjaxOptions
-        {
-            HttpMethod = "GET", // HttpMethod to use, GET or POST
-            UpdateTargetId = "divJobLinks", // ID of the HTML element to update
-            InsertionMode = InsertionMode.Replace, // Replace the existing contents
-            LoadingElementId = "divloading",
-            OnBegin = "ClearDivJobLinks",
-            OnSuccess = "SaveSearchOption1"
-        })
-
-    <span style="color:Blue">|</span>
-
-    @Ajax.ActionLink("Jobs By Location", "JobsByLocation",
-        new AjaxOptions
-        {
-            HttpMethod = "GET", // HttpMethod to use, GET or POST
-            UpdateTargetId = "divJobLinks", // ID of the HTML element to update
-            InsertionMode = InsertionMode.Replace, // Replace the existing contents
-            LoadingElementId = "divloading",
-            OnBegin = "ClearDivJobLinks",
-            OnSuccess = "SaveSearchOption2"
-        })
-
-    <span style="color:Blue">|</span>
-
-    @Ajax.ActionLink("Quick Search", "QuickSearch", new { industry = "", area1 = "", jobType = "", location = "" },
-        new AjaxOptions
-        {
-            HttpMethod = "GET", // HttpMethod to use, GET or POST
-            UpdateTargetId = "divJobLinks", // ID of the HTML element to update
-            InsertionMode = InsertionMode.Replace, // Replace the existing contents
-            LoadingElementId = "divloading",
-            OnBegin = "ClearDivJobLinks",
-            OnSuccess = "SaveSearchOption3"
-        })
+<div class="row">
+    <div class="col-sm-12">
+        <h2>JobSearch</h2>
+    </div>
+    <div class="col-md-2 jobSearchItem">
+        @Ajax.ActionLink("Jobs By Industry", "JobsByIndustry", null,
+            new AjaxOptions
+            {
+                HttpMethod = "GET", // HttpMethod to use, GET or POST
+                UpdateTargetId = "divJobLinks", // ID of the HTML element to update
+                InsertionMode = InsertionMode.Replace, // Replace the existing contents
+                LoadingElementId = "divloading",
+                OnBegin = "ClearDivJobLinks",
+                OnSuccess = "SaveSearchOption1"
+            }, new { @class = "btn btn-primary" })
+    </div>
+    <div class="col-md-2 jobSearchItem">
+        @Ajax.ActionLink("Jobs By Location", "JobsByLocation", null,
+            new AjaxOptions
+            {
+                HttpMethod = "GET", // HttpMethod to use, GET or POST
+                UpdateTargetId = "divJobLinks", // ID of the HTML element to update
+                InsertionMode = InsertionMode.Replace, // Replace the existing contents
+                LoadingElementId = "divloading",
+                OnBegin = "ClearDivJobLinks",
+                OnSuccess = "SaveSearchOption2"
+            }, new { @class = "btn btn-primary" })
+    </div>
+    <div class="col-md-2 jobSearchItem">
+        @Ajax.ActionLink("Quick Search", "QuickSearch", new { industry = "", area1 = "", jobType = "", location = "" },
+            new AjaxOptions
+            {
+                HttpMethod = "GET", // HttpMethod to use, GET or POST
+                UpdateTargetId = "divJobLinks", // ID of the HTML element to update
+                InsertionMode = InsertionMode.Replace, // Replace the existing contents
+                LoadingElementId = "divloading",
+                OnBegin = "ClearDivJobLinks",
+                OnSuccess = "SaveSearchOption3"
+            }, new { @class = "btn btn-primary" })
+    </div>
     <br />
-    <div id="divloading" style="display:none;">
+    <div id="divloading" style="display:none;" class="col-sm-12">
         <img src="~/Images/spinner.gif" />
     </div>
     <br />
-    <div id="divJobLinks"></div>
+    <div id="divJobLinks" class="col-sm-12" style="border:2px solid blue;margin-top:5px"></div>
     <br />
     <br />
     <div id="divJobs"></div>
@@ -74,7 +75,7 @@
 
         $(document).ready(function ()
         {
-            if (document.cookie.length != 0) {
+            if (document.cookie != null) {
                 var cookiesArray = document.cookie.split(";");
                 for (var i = 0; i < cookiesArray.length; i++)
                 {
@@ -85,7 +86,7 @@
                         {
                             $('#divJobLinks').load("/Home/JobsByIndustry");
                             var cookie = '@HttpContext.Current.Request.Cookies["mycookieInd"].Value';
-                            $('#divJobs').load("/Home/DisplayJobs",
+                                $('#divJobs').load("/Home/DisplayJobs",
                                 {
                                     searchBy: "industry",
                                     searchValue: cookie
@@ -108,7 +109,7 @@
                             $('#divJobLinks').load("/Home/QuickSearch",
                                 {
                                     industry: searchArray[0],
-                                    area: searchArray[1],
+                                    area1: searchArray[1],
                                     jobType: searchArray[2],
                                     location: searchArray[3]
                                 });

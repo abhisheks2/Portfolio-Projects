@@ -14,17 +14,17 @@ namespace JobPortal.Areas.JobSeeker.Controllers
         public ActionResult JobSearch()
         {
             HttpCookie myCookie1 = new HttpCookie("mycookie1");
-            myCookie1.Value = "Creating cookie";
+            myCookie1.Value = "";
             //myCookie.Expires = DateTime.Now.AddHours(1);
             Response.Cookies.Add(myCookie1);
 
             HttpCookie myCookieLoc1 = new HttpCookie("mycookieLoc1");
-            myCookieLoc1.Value = "Creating cookie";
+            myCookieLoc1.Value = "";
             //myCookie.Expires = DateTime.Now.AddHours(1);
             Response.Cookies.Add(myCookieLoc1);
 
             HttpCookie myCookieInd1 = new HttpCookie("mycookieInd1");
-            myCookieInd1.Value = "Creating cookie";
+            myCookieInd1.Value = "";
             //myCookie.Expires = DateTime.Now.AddHours(1);
             Response.Cookies.Add(myCookieInd1);
 
@@ -36,7 +36,7 @@ namespace JobPortal.Areas.JobSeeker.Controllers
             List<JobPost> model = new List<JobPost>();
             if (searchBy == "location")
             {
-                model = db.JobPosts.Where(j => j.location == searchValue && j.isAvailable == true).ToList();
+                model = db.JobPosts.Where(j => j.location == searchValue).ToList();
                 HttpCookie myCookieLoc1 = new HttpCookie("mycookieLoc1");
                 myCookieLoc1.Value = searchValue;
                 //myCookie.Expires = DateTime.Now.AddHours(1);
@@ -59,7 +59,7 @@ namespace JobPortal.Areas.JobSeeker.Controllers
         public PartialViewResult JobsByLocation()
         {
             List<DynamicActionLink> links = new List<DynamicActionLink>();
-            var jobLocations = db.JobPosts.Where(j => j.isAvailable == true).Select(x => x.location).Distinct().ToList();
+            var jobLocations = db.JobPosts.Select(x => x.location).Distinct().ToList();
             foreach (var joblocation in jobLocations)
             {
                 DynamicActionLink link = new DynamicActionLink();
@@ -103,7 +103,7 @@ namespace JobPortal.Areas.JobSeeker.Controllers
             ViewBag.Industry = new SelectList(db.Categories, "category_id", "category_name", industry);
             ViewBag.Area1 = new SelectList(db.Areas, "area_id", "area_name", area1);
             ViewBag.JobType = new SelectList(Enum.GetNames(typeof(JobType)), jobType);
-            ViewBag.Location = new SelectList(db.JobPosts.Where(j => j.isAvailable == true).Select(x => x.location).Distinct().ToList(), location);
+            ViewBag.Location = new SelectList(db.JobPosts.Select(x => x.location).Distinct().ToList(), location);
             return PartialView("_QuickSearch");
         }
 
