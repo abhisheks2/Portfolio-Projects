@@ -40,7 +40,7 @@ namespace HomeFinance.Controllers
                 DashboardViewModel viewModel = new DashboardViewModel();
                 viewModel.expType = expenseLimit.ExpenseType;
                 viewModel.monthlyLimit = expenseLimit.Limit;
-                viewModel.currentSpend = expenses.Where(e => e.ExpenseType == expenseLimit.ExpenseType).Select(e => e.ExpenseAmount).Sum();
+                viewModel.currentSpend = expenses.Where(e => e.ExpenseType == expenseLimit.ExpenseType && e.ExpenseDate.Month == DateTime.Now.Month).Select(e => e.ExpenseAmount).Sum();
                 if (viewModel.currentSpend > viewModel.monthlyLimit)
                 {
                     viewModel.ragStatus = "red";
